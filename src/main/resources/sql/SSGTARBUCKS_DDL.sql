@@ -5,6 +5,9 @@
 #GRANT ALL PRIVILEGES ON  SSGtarbucksDB.* TO 'SSGtarbucks'@'localhost' WITH GRANT OPTION;
 #FLUSH PRIVILEGES;
 #COMMIT;
+
+# PW BCRYPT 암호화
+
 /*
 # complete
 CREATE TABLE IF NOT EXISTS   branch (
