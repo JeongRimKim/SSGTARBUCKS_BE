@@ -67,7 +67,7 @@ public class UserController {
 	@PostMapping("/user/signup")
     public ResponseEntity<UserDTO> signup(@RequestBody UserDTO userDTO) { // 회원 가입
 		System.out.println("UserController - /user/signup(POST) >>> userDTO : " + userDTO);
-    		// PW 테스트용 생성
+    		// PW 테스트용 생성(feature테스트)
            // userService.signup(userDTO);
   
         return ResponseEntity.ok(userDTO);
