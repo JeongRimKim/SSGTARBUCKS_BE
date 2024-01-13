@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.ssgtarbucks.persistence.UserRepository">
+	<!-- 회원가입  : BcryteEncoding 테스트 용(삭제X) -->
+	 <insert id="insertUserToJoin" parameterType="UserDTO">
+        INSERT INTO user(user_id,user_pw,user_name,user_type,user_phone,user_email)
+        VALUES(#{user_id}, #{user_pw}, #{user_name}, #{user_type}, #{user_phone}, #{user_email})
+    </insert>
+
+
+	<!-- 직원 정보만 조회(로그인용) -->
+	<select id="selectUserByUserId" parameterType="String" resultType="UserDTO">
+		SELECT *
+		FROM user
+		WHERE user_id=#{user_id}
+	</select>
+
+	<!-- 직원,지점 통합 정보 조회(지점정보용 or jwt용) -->
+	<select id="selectUserAndBranchToInfo" resultType="UserDTO">
+		SELECT *
+		FROM user u
+			inner join branch b
+        ON u.branch_id=b.branch_id
+		WHERE user_id=#{user_id};
+	</select>
+
+	<!-- 비밀번호 변경 -->
+	<update id="updateUserByUserIdToChgPW" parameterType="hashmap">
+		UPDATE user
+		SET user_pw = #{user_pw}
+		WHERE user_id = #{user_id}
+	</update>
+	
+	<!--  안쓰는 아이들  -->
+	<!-- 로그인 검사 -->
+	<select id="selectUserbyUserIdAndUserPwToCheck"
+		parameterType="UserDTO" resultType="UserDTO">
+		SELECT *
+		FROM user
+		WHERE user_id = #{user_id} and user_pw=#{user_pw}
+	</select>
+</mapper>
