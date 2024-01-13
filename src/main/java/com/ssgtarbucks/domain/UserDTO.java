@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
 @Data
 @ToString
 @NoArgsConstructor
@@ -22,4 +21,5 @@ public class UserDTO {
 	private String branch_id;
 	private String branch_name;
 	private String branch_address;
+	//건우 DTO개발중..
 }
