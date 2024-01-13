@@ -40,7 +40,6 @@ public class BranchController {
 	@GetMapping("/main")
     public String branch_main() { 
 		System.out.println("BranchController - /main(GET) >>>");
-		//아무 값이나 삽입하기2222
 	     return "리액트로 전달하고 싶은 Data";
     }
 }
