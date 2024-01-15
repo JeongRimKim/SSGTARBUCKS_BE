@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.ssgtarbucks.persistence.IncomeRepository">
+
+	<!-- 지점별 목록 개수 구하기 (페이지네이션용)-->
+	<select id="selectIncomeCountByBranchId" parameterType="string" resultType="int">
+		select count(*) from income where branch_id = #{branch_id}
+	</select>
+	
+
+	<!-- 입고내역 조회 -->
+	<select id="selectIncomeListByBranchId" parameterType="string" resultType="IncomeDTO">
+		select 
+			i.income_id,
+			i.income_code,
+		    i.income_date,
+		    i.income_amount,
+		    i.income_status,
+		    i.branch_id,
+		    il.income_list_id,
+		    il.income_list_quantity,
+		    il.income_list_result,
+		    il.item_id,
+		    
+		    item.item_exp,
+		    p.product_name
+		from income i
+		join income_list il on il.income_id = i.income_id
+		join item item on item.item_id = il.item_id
+		join product p on item.product_id = p.product_id
+		where i.branch_id =#{branch_id}
+	</select>
+	
+</mapper>
