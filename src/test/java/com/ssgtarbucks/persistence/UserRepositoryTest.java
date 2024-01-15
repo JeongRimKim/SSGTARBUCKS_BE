@@ -32,12 +32,14 @@ class UserRepositoryTest {
 		UserDTO userDTO = mapper.selectUserByUserId("m001");
 		log.info("====================================================\\n" + userDTO);
 	}
+	
 	@Disabled
 	@Test
 	public void selectUserAndBranchToInfo() throws Exception {
 		UserDTO userDTO = mapper.selectUserAndBranchToInfo("a001");
 		log.info("====================================================\\n" + userDTO);
 	}
+	
 	@Disabled
 	@Test
 	public void insertUserToJoin() throws Exception {
@@ -53,8 +55,7 @@ class UserRepositoryTest {
 		assertEquals(1, mapper.insertUserToJoin(dto));
 	}
 	
-
-	@Disabled
+	
 	@Test
 	public void updateBCryptPW() throws Exception {
 		//이클립스 SHA256 -> 스프링시큐리티 BCryptPasswordEncoder

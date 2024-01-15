@@ -5,13 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 <mapper namespace="com.ssgtarbucks.persistence.IncomeRepository">
-
-	<!-- 지점별 목록 개수 구하기 (페이지네이션용)-->
-	<select id="selectIncomeCountByBranchId" parameterType="string" resultType="int">
-		select count(*) from income where branch_id = #{branch_id}
-	</select>
 	
-
 	<!-- 입고내역 조회 -->
 	<select id="selectIncomeListByBranchId" parameterType="string" resultType="IncomeDTO">
 		select 
