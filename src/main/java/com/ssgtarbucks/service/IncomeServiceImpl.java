@@ -15,16 +15,10 @@ public class IncomeServiceImpl implements IncomeService {
 	private IncomeRepository incomeRepository;
 	
 	@Override
-	public List<IncomeDTO> selectIncomeListByBranchId(String branch_id, int curPage) {
-		int totalCount = incomeRepository.selectIncomeCountByBranchId(branch_id);
+	public List<IncomeDTO> selectIncomeListByBranchId(String branch_id) {
 		
 		return incomeRepository.selectIncomeListByBranchId(branch_id);
 		
-	}
-
-	@Override
-	public int selectIncomeCountByBranchId(String branch_id) {
-		return incomeRepository.selectIncomeCountByBranchId(branch_id);
 	}
 
 }

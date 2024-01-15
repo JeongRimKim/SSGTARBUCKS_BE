@@ -23,12 +23,9 @@ public class IncomeController {
 	
 	@GetMapping("/list")
 	public ResponseEntity<List<IncomeDTO>> incomeList (@RequestParam String branch_id) { //입고목록
-		//@RequestParam(required = false, defaultValue = "1") int curPage
 		System.out.println("branch_id>>>>>>>>>>>>" + branch_id);
-		
-		int curPage = 1;
-		
-		List<IncomeDTO> incomeList = incomeService.selectIncomeListByBranchId(branch_id,curPage);
+				
+		List<IncomeDTO> incomeList = incomeService.selectIncomeListByBranchId(branch_id);
 		System.out.println("IncomeController - /income/list/incomeList(get) >>> incomeList :" + incomeList);
 
         return ResponseEntity.ok(incomeList);
