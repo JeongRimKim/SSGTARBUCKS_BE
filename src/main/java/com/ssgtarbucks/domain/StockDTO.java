@@ -47,6 +47,15 @@ public class StockDTO {
 
 /*
 SELECT distinct
+    p.product_id,		
+    p.product_code,
+    p.product_name,
+    p.product_standard,
+    p.product_unit,
+    p.product_spec,
+    p.category_id,
+    p.image_id,		
+    
 	s.stock_id,
     s.stock_quantity,
     
@@ -57,16 +66,6 @@ SELECT distinct
     sl.location_colum,
     sl.location_row,
     sl.location_alias,
-    
-    
-    p.product_id,		
-    p.product_code,
-    p.product_name,
-    p.product_standard,
-    p.product_unit,
-    p.product_spec,
-    p.category_id,
-    p.image_id,		
     
     i.item_id,
     i.item_code,

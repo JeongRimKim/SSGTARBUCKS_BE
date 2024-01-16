@@ -10,6 +10,6 @@ import com.ssgtarbucks.domain.StockDTO;
 @Mapper
 public interface ProductRepository {
 		
-	public List<ProductDTO> selectStorageByBranchId(String branch_id);
+	public List<ProductDTO> selectProductListByBranchId(String branch_id);
 	
 }

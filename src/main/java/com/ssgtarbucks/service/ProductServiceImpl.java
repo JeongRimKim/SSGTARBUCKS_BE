@@ -16,7 +16,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public List<ProductDTO> selectProductListByBranchId(String branch_id) {
-		return productRepository.selectStorageByBranchId(branch_id);
+		return productRepository.selectProductListByBranchId(branch_id);
 	}
 
 }
