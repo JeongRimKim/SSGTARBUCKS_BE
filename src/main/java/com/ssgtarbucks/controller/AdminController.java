@@ -61,7 +61,6 @@ public class AdminController {
 
 	    // 응답 데이터를 생성
 	    String responseData = "Main Page Data"; // 실제 응답 데이터를 생성하거나 가져오는 로직을 추가
-
 	    return new ResponseEntity<>(responseData, header, HttpStatus.OK);
 	}
 	
