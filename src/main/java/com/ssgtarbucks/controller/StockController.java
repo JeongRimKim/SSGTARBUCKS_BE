@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssgtarbucks.domain.SaleDTO;
 import com.ssgtarbucks.domain.StockDTO;
 import com.ssgtarbucks.service.StockService;
 
@@ -22,7 +23,7 @@ public class StockController {
 	private StockService stockService;
 	
 	@GetMapping("/list")
-	public ResponseEntity<List<StockDTO>> stockList (@RequestParam String branch_id) { //입고목록
+	public ResponseEntity<List<StockDTO>> stockList (@RequestParam String branch_id) { 
 		System.out.println("branch_id>>>>>>>>>>>>" + branch_id);
 		
 		List<StockDTO> stockList = stockService.selectStorageByBranchId(branch_id);
@@ -32,19 +33,44 @@ public class StockController {
     }
 	
 	@PutMapping("/quantity")
-	public ResponseEntity<List<StockDTO>> changeQuantity (@RequestParam String branch_id, @RequestBody StockDTO stockDTO ) { //입고목록
+	public ResponseEntity<List<StockDTO>> changeQuantity (@RequestParam String branch_id, @RequestBody StockDTO stockDTO ) { 
 		System.out.println("branch_id>>>>>>>>>>>>" + branch_id);
 		System.out.println(stockDTO.getItem_id());
 		System.out.println(stockDTO.getStock_quantity());
 
 		int result = stockService.updateStockQuantityByItemId(stockDTO.getStock_quantity(), stockDTO.getItem_id());
 		if(result > 0) {
-			System.out.println("StockController - /stock/list/quantity(post) >>> 수량정정성공");
+			System.out.println("StockController - /stock/list/quantity(put) >>> 수량정정성공");
 		}
 				
 		List<StockDTO> stockList = stockService.selectStorageByBranchId(branch_id);
-		System.out.println("StockController - /stock/list/quantity(post) >>> stockList :" + stockList);
+		System.out.println("StockController - /stock/list/quantity(put) >>> stockList :" + stockList);
 
         return ResponseEntity.ok(null);
     }
+	
+	@GetMapping("/sale/list")
+	public ResponseEntity<List<SaleDTO>> saleList (@RequestParam String branch_id) { 
+		System.out.println("branch_id>>>>>>>>>>>>" + branch_id);
+		
+		List<SaleDTO> saleList = stockService.selectSaleListByBranchId(branch_id);
+		System.out.println("StockController - /stock/sale/list/stockList(get) >>> stockList :" + saleList);
+
+        return ResponseEntity.ok(saleList);
+    }
+	
+	@PutMapping("/sale/product")
+	public ResponseEntity<List<SaleDTO>> changeQuantity (@RequestParam String branch_id) { 
+		System.out.println("branch_id>>>>>>>>>>>>" + branch_id);
+
+		
+		List<SaleDTO> saleList = stockService.selectSaleListByBranchId(branch_id);
+		
+		stockService.updateSaleTransaction(branch_id, saleList);
+
+		System.out.println("StockController - /stock/list/quantity(put) >>> stockList :" + saleList);
+
+        return ResponseEntity.ok(null);
+    }
+	
 }

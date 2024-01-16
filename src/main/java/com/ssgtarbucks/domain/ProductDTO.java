@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-//product+item+stock+image
+//product+item+stock+image+category+stock_location
 @Data
 @ToString
 @NoArgsConstructor
@@ -22,7 +22,8 @@ public class ProductDTO {
 	String product_standard;
 	String product_unit;
 	String product_spec;
-	String category_id;
+	
+	String category_name;
 	
 	int item_id;
 	Date item_exp;
@@ -33,6 +34,12 @@ public class ProductDTO {
 	
 	String image_id;
 	String image_path;
+	
+	String location_code;
+	String location_area;
+	String location_section;
+	String location_section_name;
+	String location_alias;
 
 }
 

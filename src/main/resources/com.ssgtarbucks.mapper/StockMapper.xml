@@ -40,7 +40,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 재고수정 -->
 	<update id="updateStockQuantityByItemId" parameterType="int">
-		update stock set stock_quantity = #{stock_quantity} where item_id = #{item_id}
+		update stock set stock_quantity = #{stock_quantity}-  where item_id = #{item_id}
 	</update>
 	
+	<!-- 판매목록조회 (미승인만)-->
+	<select id="selectSaleListByBranchId" parameterType="string" resultType="SaleDTO">
+		select 
+			s.sale_code,
+			s.sale_date,
+		    s.sale_amount,
+		    s.sale_status,
+		    sl.item_id,
+		    p.product_name,
+		    sl.sale_list_quantity
+		from sale s
+		join sale_list sl on sl.sale_id = s.sale_id
+		join item i on i.item_id = sl.item_id
+		join product p on p.product_id = i.product_id
+		where s.branch_id = #{branch_id} and s.sale_status = '미승인'
+		order by s.sale_date desc
+	</select>
+	
+	<!-- 판매갱신 (sale_status 상태 변경 stock테이블 재고 개수 업데이트)  -->
+	<update id="updateSaleList">
+		update sale set sale_status = '승인' where branch_id=#{branch_id}
+	</update>
+	
+	<!-- 판매갱신 - 재고수정 -->
+	<update id="updateStockQuantity" parameterType="int">
+		update stock set stock_quantity = stock_quantity - #{stock_quantity}  where item_id = #{item_id}
+	</update>
+
+	<!-- 판매갱신 - 상품상태수정 -->
+	<update id="updateItemStatus" parameterType="int">
+		update item set item_status = 'sold out'  where item_id = #{item_id}
+	</update>
+
+
 </mapper>
