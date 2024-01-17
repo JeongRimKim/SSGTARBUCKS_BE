@@ -57,7 +57,9 @@ public class BranchController {
 		return ResponseEntity.ok(totalList);
     }
 	
+	    
 	
+	//ㅇㄹ
 	@GetMapping("/integrate/search")
     public ResponseEntity<List<TotalDTO>> search(@RequestParam String branch_id, String searchWord) { 
 		System.out.println("BranchController - /integrate/search(GET) >>>"+branch_id+"/"+searchWord);
