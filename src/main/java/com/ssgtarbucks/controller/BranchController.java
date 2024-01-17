@@ -2,6 +2,8 @@ package com.ssgtarbucks.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssgtarbucks.domain.IncomeDTO;
+import com.ssgtarbucks.domain.StockLocationDTO;
 import com.ssgtarbucks.domain.TokenDTO;
 import com.ssgtarbucks.domain.TotalDTO;
 import com.ssgtarbucks.domain.UserDTO;
@@ -57,9 +60,9 @@ public class BranchController {
 		return ResponseEntity.ok(totalList);
     }
 	
-	    
 	
-	//wwww
+	
+	
 	@GetMapping("/integrate/search")
     public ResponseEntity<List<TotalDTO>> search(@RequestParam String branch_id, String searchWord) { 
 		System.out.println("BranchController - /integrate/search(GET) >>>"+branch_id+"/"+searchWord);
@@ -68,4 +71,19 @@ public class BranchController {
 				
 		return ResponseEntity.ok(totalList);
     }
+	
+
+	// QR코드등록 -> 보관장소등록 (forward)
+	@PostMapping("/location/new")
+	public ResponseEntity<StockLocationDTO> registerLocation(@RequestParam(required = false) String branch_id,
+			/* @ModelAttribute("list")*/@RequestParam(required = false) List<StockLocationDTO> list, HttpSession session) {
+		System.out.println("BranchController - /location/new(POST) >>>" + list + " " + branch_id);
+		System.out.println("Model>>>>>>>>>>>>" + session.getAttribute("list"));
+		
+		HttpHeaders header = new HttpHeaders();
+		header.add("Content-Type", "application/json;charset=UTF-8");
+		
+		return new ResponseEntity<>(null, header, HttpStatus.OK);
+
+	}
 }
