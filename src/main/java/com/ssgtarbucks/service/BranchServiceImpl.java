@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssgtarbucks.domain.IncomeDTO;
 import com.ssgtarbucks.domain.TotalDTO;
+import com.ssgtarbucks.domain.UserDTO;
 import com.ssgtarbucks.persistence.BranchRepository;
 import com.ssgtarbucks.persistence.IncomeRepository;
 
@@ -24,6 +25,11 @@ public class BranchServiceImpl implements BranchService {
 	@Override
 	public List<TotalDTO> selectExpirationDateList(String branch_id, String curDate) {
 		return branchRepository.selectExpirationDateList(branch_id, curDate);
+	}
+
+	@Override
+	public UserDTO selectUserAndBranchInfo(String branch_id) {
+		return branchRepository.selectUserAndBranchInfo(branch_id);
 	}
 	
 

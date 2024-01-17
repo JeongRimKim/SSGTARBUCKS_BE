@@ -58,8 +58,6 @@ public class BranchController {
     }
 	
 	    
-	
-	//wwww
 	@GetMapping("/integrate/search")
     public ResponseEntity<List<TotalDTO>> search(@RequestParam String branch_id, String searchWord) { 
 		System.out.println("BranchController - /integrate/search(GET) >>>"+branch_id+"/"+searchWord);
@@ -67,5 +65,14 @@ public class BranchController {
 		List<TotalDTO> totalList = branchService.selectSearchBySearchWord(searchWord);
 				
 		return ResponseEntity.ok(totalList);
+    }
+	
+	@GetMapping("/info")
+    public ResponseEntity<UserDTO> info(@RequestParam String branch_id) { 
+		System.out.println("BranchController - /info(GET) >>>"+branch_id);
+		
+		UserDTO userDTO = branchService.selectUserAndBranchInfo(branch_id);
+		
+		return ResponseEntity.ok(userDTO);
     }
 }
