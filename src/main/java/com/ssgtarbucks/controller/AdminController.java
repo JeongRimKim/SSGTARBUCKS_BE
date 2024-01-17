@@ -1,5 +1,7 @@
 package com.ssgtarbucks.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssgtarbucks.domain.TokenDTO;
+import com.ssgtarbucks.domain.TotalDTO;
 import com.ssgtarbucks.domain.UserDTO;
 import com.ssgtarbucks.jwt.JwtUtil;
 import com.ssgtarbucks.service.UserService;
@@ -64,5 +68,12 @@ public class AdminController {
 	    return new ResponseEntity<>(responseData, header, HttpStatus.OK);
 	}
 	
-	
+	@GetMapping("/integrate/search")
+    public ResponseEntity<List<TotalDTO>> search(@RequestParam String branch_id, String searchWord) { 
+		System.out.println("BranchController - /integrate/search(GET) >>>"+branch_id+"/"+searchWord);
+		
+		//List<TotalDTO> totalList = branchService.selectSearchBySearchWord(searchWord);
+			
+		return ResponseEntity.ok(null);
+    }
 }

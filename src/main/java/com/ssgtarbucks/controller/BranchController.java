@@ -61,8 +61,6 @@ public class BranchController {
     }
 	
 	
-	
-	
 	@GetMapping("/integrate/search")
     public ResponseEntity<List<TotalDTO>> search(@RequestParam String branch_id, String searchWord) { 
 		System.out.println("BranchController - /integrate/search(GET) >>>"+branch_id+"/"+searchWord);
@@ -71,7 +69,15 @@ public class BranchController {
 				
 		return ResponseEntity.ok(totalList);
     }
-	
+
+	@GetMapping("/info")
+    public ResponseEntity<UserDTO> info(@RequestParam String branch_id) { 
+		System.out.println("BranchController - /info(GET) >>>"+branch_id);
+		
+		UserDTO userDTO = branchService.selectUserAndBranchInfo(branch_id);
+		
+		return ResponseEntity.ok(userDTO);
+    }
 
 	// QR코드등록 -> 보관장소등록 (forward)
 	@PostMapping("/location/new")
