@@ -50,11 +50,11 @@ public class BranchController {
     public ResponseEntity<List<TotalDTO>> branch_main(@RequestParam String branch_id, 
     		@RequestParam(required = false, defaultValue = "#{T(java.time.LocalDate).now().toString()}")
     		@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) String curDate) { 
-		System.out.println("BranchController - /main(GET) >>>");
+		System.out.println("BranchController - /main(GET) >>>"+branch_id+"/"+curDate);
 		
 		List<TotalDTO> totalList = branchService.selectExpirationDateList(branch_id,curDate);
-		System.out.println(totalList);
-		return ResponseEntity.ok(null);
+		//System.out.println(totalList);
+		return ResponseEntity.ok(totalList);
     }
 	
 	

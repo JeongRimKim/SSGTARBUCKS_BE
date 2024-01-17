@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.ssgtarbucks.persistence.BranchRepository">
+	
+	<!-- 통합검색  -->
+	<select id="selectSearchBySearchWord" parameterType="string" resultType="ToTalDTO">
+		SELECT 
+		    p.product_id,		
+		    p.product_code,
+		    p.product_name,
+		    p.product_standard,
+		    p.product_unit,
+		    p.product_spec,
+		    p.category_id,
+			p.image_id,		
+			
+		    c.category_name,
+		    
+		    i.item_id,
+		    i.item_exp,
+		    i.item_status,
+		    
+			q.qrcode_id,
+			
+		    sl.location_code,	
+		    sl.location_area,
+		    sl.location_section,
+		    sl.location_section_name,
+		    sl.location_alias,
+		    s.stock_quantity
+		FROM
+		    item i
+		JOIN qrcode q ON i.qrcode_id = q.qrcode_id
+		JOIN product p ON i.product_id = p.product_id
+		JOIN stock s ON s.item_id = i.item_id
+		JOIN stock_location sl ON sl.location_id = s.location_id
+		JOIN category c on c.category_id = p.category_id
+		where s.branch_id='bid001' and (p.product_code like concat('%',#{searchWord},'%') or p.product_name like concat('%',#{searchWord},'%')
+										or p.product_standard like concat('%',#{searchWord},'%') or p.product_spec like concat('%',#{searchWord},'%')
+										or c.category_name like  concat('%',#{searchWord},'%') or i.item_exp like concat('%',#{searchWord},'%') 
+		                                or sl.location_area like concat('%',#{searchWord},'%') or sl.location_code like concat('%',#{searchWord},'%')
+		                                or sl.location_section_name like concat('%',#{searchWord},'%') or sl.location_alias like concat('%',#{searchWord},'%')
+		                                or sl.location_alias like concat('%',#{searchWord},'%'))
+	</select>
+	
+	<!-- 유통기한 임박상품 표시 -->
+	<select id="selectExpirationDateList" parameterType="string" resultType="TotalDTO">
+	<![CDATA[
+		SELECT 
+		    p.product_id,		
+		    p.product_code,
+		    p.product_name,
+		    p.product_standard,
+		    p.product_unit,
+		    p.product_spec,
+		    p.category_id,
+			p.image_id,		
+			
+		    c.category_name,
+		    
+		    i.item_id,
+		    i.item_exp,
+		    i.item_status,
+		    
+			q.qrcode_id,
+			
+		    sl.location_code,	
+		    sl.location_area,
+		    sl.location_section,
+		    sl.location_section_name,
+		    sl.location_alias,
+		    s.stock_quantity
+		FROM
+		    item i
+		JOIN qrcode q ON i.qrcode_id = q.qrcode_id
+		JOIN product p ON i.product_id = p.product_id
+		JOIN stock s ON s.item_id = i.item_id
+		JOIN stock_location sl ON sl.location_id = s.location_id
+		JOIN category c on c.category_id = p.category_id
+		where s.branch_id=#{branch_id} and i.item_exp  <= #{curDate} + INTERVAL 7 DAY and  i.item_exp  >= #{curDate}
+        order by i.item_exp
+        ]]> 
+	</select>
+	
+</mapper>
