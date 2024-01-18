@@ -40,22 +40,22 @@ class UserRepositoryTest {
 		log.info("====================================================\\n" + userDTO);
 	}
 	
-	@Disabled
+	
 	@Test
 	public void insertUserToJoin() throws Exception {
 		UserDTO dto = new UserDTO();
 		dto.setUser_id("m060");
 		String samplePwd = new BCryptPasswordEncoder().encode("m060");
 		dto.setUser_pw(samplePwd);
-		dto.setUser_name("김태형");
+		dto.setUser_name("양지용");
 		dto.setUser_type("manager");
-		dto.setUser_email("hunghung60@google.com");
-		dto.setUser_phone("010-5555-4444");
-
+		dto.setUser_email("seungwon123@google.com");
+		dto.setUser_phone("010-9875-3214");
+		System.out.println(">>>>>>>"+samplePwd);
 		assertEquals(1, mapper.insertUserToJoin(dto));
 	}
 	
-	
+	@Disabled
 	@Test
 	@Disabled
 	public void updateBCryptPW() throws Exception {

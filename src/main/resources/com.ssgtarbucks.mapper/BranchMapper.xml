@@ -86,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ]]> 
 	</select>
 	
-	<!-- 지점정보표시 -->
+	<!-- 내정보조회(관리자, 매니저 통합조회 ) -->
 	<select id="selectUserAndBranchInfo" parameterType="string" resultType="UserDTO">
 		select * from user u
 		join branch b on b.branch_id = u.branch_id
