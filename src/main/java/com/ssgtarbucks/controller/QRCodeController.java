@@ -110,7 +110,7 @@ public class QRCodeController {
 
 		return null;
 	}
-
+ 
 	@GetMapping("/inspection/product")
 	public String inspectionProduct(@RequestParam String branch_id) {
 
