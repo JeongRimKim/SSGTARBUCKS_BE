@@ -66,15 +66,16 @@ public class QRCodeController {
 	@Autowired
 	private QRCodeService qrCodeService;
 
-	@GetMapping("/search/{qrcode_id}")
-	public ResponseEntity<StorageDTO> search(@PathVariable("qrcode_id") int qrcode_id) {
+	@GetMapping("/search/{qrcode_value}")
+	public ResponseEntity<StorageDTO> search(@PathVariable("qrcode_value") String qrcode_value) {
 
 		System.out.println("QRCodeController - /search(GET) >>>");
 
 		HttpHeaders header = new HttpHeaders();
 		header.add("Content-Type", "application/json;charset=UTF-8");
 
-		StorageDTO responseData = qrCodeService.joinStroagebyQRCodeIdToSearch(qrcode_id);
+		System.out.println("qrcode 값 : "+qrcode_value);
+		StorageDTO responseData = qrCodeService.joinStroagebyQRCodeIdToSearch(1);
 
 		return new ResponseEntity<>(responseData, header, HttpStatus.OK);
 	}

@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ssgtarbucks.domain.IncomeDTO;
+import com.ssgtarbucks.domain.MainResponseDTO;
+import com.ssgtarbucks.domain.ProductDTO;
 import com.ssgtarbucks.domain.StockLocationDTO;
 import com.ssgtarbucks.domain.TokenDTO;
 import com.ssgtarbucks.domain.TotalDTO;
@@ -60,8 +62,14 @@ public class BranchController {
 		System.out.println("BranchController - /main(GET) >>>"+branch_id+"/"+curDate);
 		
 		List<TotalDTO> totalList = branchService.selectExpirationDateList(branch_id,curDate);
-		//System.out.println(totalList);
-		return ResponseEntity.ok(totalList);
+//		List<ProductDTO> lastProductList = branchService.joinProductFortotalProductQuantity(branch_id);
+//		System.out.println(totalList);
+//		 MainResponseDTO responseDTO = new MainResponseDTO();
+//	    responseDTO.setTotalList(totalList);
+//	    responseDTO.setLastProductList(lastProductList);
+//	    return ResponseEntity.ok(responseDTO);	
+		
+		return ResponseEntity.ok(totalList);	
     }
 	
 	
