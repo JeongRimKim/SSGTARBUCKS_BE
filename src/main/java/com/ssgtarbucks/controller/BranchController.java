@@ -94,6 +94,7 @@ public class BranchController {
 		session.setAttribute("list", list);
 		session.setAttribute("branch_id", branch_id);
 		
+		
 		branchService.registerStockLocatioinWithTrans(list);
 		
 		//QR등록으로 전달

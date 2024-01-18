@@ -19,19 +19,28 @@
 			join qrcode q on q.qrcode_id = i.qrcode_id
 		WHERE q.qrcode_id = #{qrcode_id}
 	</select>
+	
+	
 	<!-- 보관장소등록 QRCode -->
 	<insert id="insertQrcodeToRegisterLocation" parameterType="QRCodeDTO">
-		INSERT INTO qrcode(qrcode_path,qrcode_date,qrcode_type)
-			VALUES (#{qrcode_path},(select curdate()),#{qrcode_type});
+		INSERT INTO qrcode(qrcode_path,qrcode_date,qrcode_type,qrcode_value)
+			VALUES (#{qrcode_path},(select curdate()),#{qrcode_type},#{qrcode_value});
 	</insert>
 	
-	<!-- QR코드 갯수 id값 가져오기 -->
-	<select  id="selectQrcodeIdToCount" resultType="_int">
-		select count(*) from qrcode;
+	<!-- QR코드 qrcode_id(primary key)가져오기 -->
+	<select  id="selectQrcodeIdToFind" parameterType="String" resultType="_int">
+		select qrcode_id from qrcode where qrcode_value=#{qrcode_value};
 	</select>
 	
+	<!-- StockLocaiton테이블 qrcode_id 삽입ㅡ -->
+	<update id="updateLocationToAddQrcodeId" parameterType="StockLocationDTO">
+		update stock_location 
+			set qrcode_id = #{qrcode_id}
+		    where location_code=#{location_code};
+	</update>
 	
-
+	
+	
 </mapper>
 
 

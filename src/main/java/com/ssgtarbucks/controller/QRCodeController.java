@@ -87,29 +87,21 @@ public class QRCodeController {
 		System.out.println("QRCodeController - /branch/location/new (Post) >>>" + list + "  " + branch_id);
 		System.out.println("Model>>>>>>>>>>>>" + session.getAttribute("list"));
 		
-		//list 삭제
-		session.invalidate();
+		//QRcode등록
+		 List<StockLocationDTO> resList = (List<StockLocationDTO>) session.getAttribute("list");
+		 System.out.println("resList >>>>>>>>>>>>"+ resList);
+		 
+		 qrCodeService.insertQrcodeToRegisterLocation(resList);
 		
+		//list 삭제
+		session.invalidate();	
 		HttpHeaders header = new HttpHeaders();
 		header.add("Content-Type", "application/json;charset=UTF-8");
-				
 
 		return new ResponseEntity<>(null, header, HttpStatus.OK);
 
 	}
 	
-//	//QR코드등록 -> 보관장소등록 (forward)
-//	@PostMapping("/branch/location/new")
-//	public ModelAndView registerLocation(@RequestBody(required = false) List<StockLocationDTO> list,
-//			@RequestParam(required = false) String branch_id, HttpSession rttr) {
-//
-//		System.out.println("QRCodeController - /branch/location/new (Post) >>>" + list + "  " + branch_id);
-//		rttr.setAttribute("list", list);
-//		rttr.setAttribute("branch_id", branch_id);
-//
-//		return new ModelAndView("forward:/api/v1/branch/location/new");
-//	}
-
 	
 	
 

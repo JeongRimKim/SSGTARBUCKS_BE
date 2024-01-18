@@ -49,8 +49,7 @@ public class BranchServiceImpl implements BranchService {
 			String locationSection = dto.getLocation_section() + Integer.toString(locationSectioMaxCount);
 			dto.setLocation_section(locationSection);
 			// location_code 생성
-			String locationCode = generateLocationCode(dto.getLocation_area(), dto.getLocation_section(),
-					dto.getLocation_column(), dto.getLocation_row());
+			String locationCode =dto.getBranch_id()+"-"+dto.getLocation_area()+"-"+dto.getLocation_section();
 			dto.setLocation_code(locationCode);
 
 			// 장소등록 후 locationCode 등록
@@ -81,19 +80,5 @@ public class BranchServiceImpl implements BranchService {
 		 */
 	}
 
-	// locationCode 문자열 조합
-	public static String generateLocationCode(String locationArea, String locationSection, int locationColumn,
-			int locationRow) {
-		// 첫 번째 글자는 대문자로, 나머지는 그대로 유지
-		String formattedArea = locationArea.substring(0, 1).toUpperCase() + locationArea.substring(1);
-
-		// 두 자리 숫자로 포맷팅 (앞에 0을 붙여주기)
-		String formattedColumn = String.format("%02d", locationColumn);
-		String formattedRow = String.format("%02d", locationRow);
-
-		// 최종적으로 조합
-		return formattedArea + "-" + locationSection + "-" + formattedColumn + "-" + formattedRow;
-
-	}
 
 }

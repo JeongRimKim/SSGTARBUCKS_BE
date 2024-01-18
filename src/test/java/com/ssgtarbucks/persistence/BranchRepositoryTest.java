@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.ssgtarbucks.domain.StockLocationDTO;
 import com.ssgtarbucks.domain.UserDTO;
 
 import lombok.Setter;
@@ -15,10 +16,13 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @SpringBootTest
-class UserRepositoryTest {
+class BranchRepositoryTest {
 
 	@Setter(onMethod = @__({ @Autowired }))
 	private UserRepository mapper;
+	
+	@Setter(onMethod = @__({ @Autowired }))
+	private BranchRepository bmapper;
 
 	@Disabled
 	@Test
@@ -55,9 +59,8 @@ class UserRepositoryTest {
 		assertEquals(1, mapper.insertUserToJoin(dto));
 	}
 	
-	
-	@Test
 	@Disabled
+	@Test
 	public void updateBCryptPW() throws Exception {
 		//이클립스 SHA256 -> 스프링시큐리티 BCryptPasswordEncoder
 		for (int i = 1; i < 5; i++) {
@@ -76,5 +79,40 @@ class UserRepositoryTest {
 		}
 		
 	}
-
+	@Disabled
+	@Test
+	public void selectLocationSectionTofindMaxValue() {
+		StockLocationDTO dto = new StockLocationDTO();
+		dto.setBranch_id("bid087");
+		dto.setLocation_section("E");
+		int max_value = bmapper.selectLocationSectionTofindMaxValue(dto);
+		log.info("결과 >>>>>> " + max_value);
+	}
+	@Disabled
+	@Test
+	public void updateLocationCode() {
+		StockLocationDTO dto = new StockLocationDTO();
+		dto.setLocation_section("E2");
+		dto.setLocation_code("RE-E2-03-02");
+		dto.setBranch_id("bid087");
+		int result = bmapper.updateLocationCode(dto);
+		log.info("결과 >>>>>>"+ result);
+	}
+	
+	@Disabled
+	@Test
+	public void insertStockLocation() {
+		StockLocationDTO dto = new StockLocationDTO();
+		dto.setLocation_area("FR");
+		dto.setLocation_section("E4");
+		dto.setLocation_section_name("상부장");
+		dto.setLocation_column(4);
+		dto.setLocation_row(5);
+		dto.setLocation_area("자동문옆상부장");
+		dto.setBranch_id("bid087");
+		int result = bmapper.insertStockLocation(dto);
+		log.info("결과 >>>>>>"+ result);
+	}
+	
+	
 }
