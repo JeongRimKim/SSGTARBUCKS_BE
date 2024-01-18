@@ -103,11 +103,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 보관장소 등록 -->
 	<insert id="insertStockLocation" parameterType="StockLocationDTO">
 	    INSERT INTO stock_location (
-	        location_area, location_section, location_section_name,
-	       location_alias, branch_id
+	        location_area, location_section, location_section_name,location_alias, branch_id
 	    ) VALUES (
-	        #{location_area}, #{location_section}, #{location_section_name},
-	        #{location_alias}, #{branch_id}
+	        #{location_area}, #{location_section}, #{location_section_name},#{location_alias}, #{branch_id}
 	    )
 	</insert>
 		

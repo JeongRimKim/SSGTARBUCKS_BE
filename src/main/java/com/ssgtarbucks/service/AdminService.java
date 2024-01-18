@@ -12,5 +12,8 @@ public interface AdminService {
 	
 	public void updateUserTransaction(UserDTO userDTO, String initialUserId);
 	public int updateUserAddBranch(String initial_id, String user_id);
+	
+	public UserDTO selectUserAndBranchInfo(String branch_id);
+
 
 }
