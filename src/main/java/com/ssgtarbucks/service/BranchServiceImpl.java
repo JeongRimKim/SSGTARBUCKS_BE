@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssgtarbucks.domain.IncomeDTO;
+import com.ssgtarbucks.domain.ProductDTO;
 import com.ssgtarbucks.domain.StockLocationDTO;
 import com.ssgtarbucks.domain.TotalDTO;
 import com.ssgtarbucks.domain.UserDTO;
@@ -78,6 +79,11 @@ public class BranchServiceImpl implements BranchService {
 		 * log.error("장소 등록 중 오류 발생: " + e.getMessage()); // 트랜잭션 롤백
 		 * TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); }
 		 */
+	}
+
+	@Override
+	public List<ProductDTO> joinProductFortotalProductQuantity(String branch_id) {
+		return branchRepository.joinProductFortotalProductQuantity(branch_id);
 	}
 
 

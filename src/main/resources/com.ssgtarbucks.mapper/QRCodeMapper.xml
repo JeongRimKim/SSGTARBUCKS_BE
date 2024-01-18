@@ -11,7 +11,7 @@
 		p.product_standard,	p.product_unit,	p.product_spec,	p.category_id,	q.qrcode_id,
 		q.qrcode_date,s.stock_id,	s.stock_date, s.branch_id, s.stock_quantity,
 		sl.location_id,	sl.location_code,sl.location_area, sl.location_section,
-		sl.location_section_name,sl.location_column, sl.location_row, sl.location_alias
+		sl.location_section_name,sl.location_column,sl.location_alias
 		FROM item i 
 			join product p on p.product_id = i.product_id
 			join stock s on s.item_id =	i.item_id

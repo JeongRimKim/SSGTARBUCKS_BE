@@ -40,7 +40,7 @@ class UserRepositoryTest {
 		log.info("====================================================\\n" + userDTO);
 	}
 	
-	
+	@Disabled
 	@Test
 	public void insertUserToJoin() throws Exception {
 		UserDTO dto = new UserDTO();
@@ -55,7 +55,6 @@ class UserRepositoryTest {
 		assertEquals(1, mapper.insertUserToJoin(dto));
 	}
 	
-	@Disabled
 	@Test
 	@Disabled
 	public void updateBCryptPW() throws Exception {

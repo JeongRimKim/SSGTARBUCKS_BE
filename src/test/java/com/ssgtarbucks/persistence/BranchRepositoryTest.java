@@ -2,12 +2,15 @@ package com.ssgtarbucks.persistence;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.ssgtarbucks.domain.ProductDTO;
 import com.ssgtarbucks.domain.StockLocationDTO;
 import com.ssgtarbucks.domain.UserDTO;
 
@@ -88,6 +91,7 @@ class BranchRepositoryTest {
 		int max_value = bmapper.selectLocationSectionTofindMaxValue(dto);
 		log.info("결과 >>>>>> " + max_value);
 	}
+	
 	@Disabled
 	@Test
 	public void updateLocationCode() {
@@ -106,13 +110,16 @@ class BranchRepositoryTest {
 		dto.setLocation_area("FR");
 		dto.setLocation_section("E4");
 		dto.setLocation_section_name("상부장");
-		dto.setLocation_column(4);
-		dto.setLocation_row(5);
 		dto.setLocation_area("자동문옆상부장");
 		dto.setBranch_id("bid087");
 		int result = bmapper.insertStockLocation(dto);
 		log.info("결과 >>>>>>"+ result);
 	}
 	
+	@Test
+	public void joinProductFortotalProductQuantity() {
+		List<ProductDTO> pList = bmapper.joinProductFortotalProductQuantity("bid001");
+		log.info("결과>>>>"+ pList);
+	}
 	
 }

@@ -1,5 +1,7 @@
 package com.ssgtarbucks.domain;
 
+import java.sql.Date;
+import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
@@ -8,17 +10,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+
 @Data
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Alias("StockLocationDTO")
-public class StockLocationDTO {
-	String location_code;
-	String location_area;	
-	String location_section;	
-	String location_section_name;	
-	String location_alias;	
-	int qrcode_id;	
-	String branch_id;
+@Alias("MainResponseDTO")
+public class MainResponseDTO {
+	 private List<TotalDTO> totalList;
+	 private List<ProductDTO> lastProductList;
 }
