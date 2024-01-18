@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,7 @@ import com.ssgtarbucks.domain.TokenDTO;
 import com.ssgtarbucks.domain.TotalDTO;
 import com.ssgtarbucks.domain.UserDTO;
 import com.ssgtarbucks.jwt.JwtUtil;
+import com.ssgtarbucks.service.AdminService;
 import com.ssgtarbucks.service.UserService;
 
 import io.swagger.models.Model;
@@ -40,8 +42,8 @@ public class AdminController {
 	@Value("${jwt.name}")
 	String tokenKey;
 
-//	@Autowired
-//	private AdminService AdminService;
+	@Autowired
+	private AdminService adminService;
 	
 //	@GetMapping("/main")
 //    public ResponseEntity<String> main(Model model) { // 회원 가입
@@ -68,12 +70,52 @@ public class AdminController {
 	    return new ResponseEntity<>(responseData, header, HttpStatus.OK);
 	}
 	
-	@GetMapping("/integrate/search")
-    public ResponseEntity<List<TotalDTO>> search(@RequestParam String branch_id, String searchWord) { 
-		System.out.println("BranchController - /integrate/search(GET) >>>"+branch_id+"/"+searchWord);
+	@GetMapping("/branch/search/")
+    public ResponseEntity<List<UserDTO>> search(@RequestParam String branch_id, String searchWord) { 
+		System.out.println("BranchController - /branch/search/(GET) >>>"+branch_id+"/"+searchWord);
 		
-		//List<TotalDTO> totalList = branchService.selectSearchBySearchWord(searchWord);
-			
-		return ResponseEntity.ok(null);
+		List<UserDTO> userList = adminService.selectSearchUserBySearchWord(searchWord);
+		System.out.println(userList);
+		
+		return ResponseEntity.ok(userList);
+    }
+	
+	@GetMapping("/branch/list")
+    public ResponseEntity<List<UserDTO>> branchList () { 
+		System.out.println("BranchController - /integrate/search(GET) >>>");
+		
+		List<UserDTO> userList = adminService.selectAllUserAndBranchInfo();
+		System.out.println(userList);
+		
+		return ResponseEntity.ok(userList);
+    }
+	
+	@GetMapping("/branch/detail")
+    public ResponseEntity<UserDTO> branchDetail(@RequestParam String branch_id) { 
+		System.out.println("BranchController - /branch/detail(GET) >>>"+branch_id);
+		
+		UserDTO userDTO = adminService.selectUserByBranchId(branch_id);
+		
+		System.out.println(userDTO);
+		
+		return ResponseEntity.ok(userDTO);
+    }
+	
+	@GetMapping("/branch/user/modify/list")
+    public ResponseEntity<List<UserDTO>> branchIsNullUser() { 
+		System.out.println("BranchController - /branch/user/modify/list(GET) >>>");
+		
+		List<UserDTO> userList = adminService.selectUserWithBranchIsNull();
+		
+		return ResponseEntity.ok(userList);
+    }
+	
+	@PutMapping("/branch/user/modify")
+    public String modifyUser(@RequestBody UserDTO selectedData, @RequestParam String initialUserId) { 
+		System.out.println("BranchController - /branch/user/modify(PUT) >>>");
+		System.out.println(selectedData);
+		adminService.updateUserTransaction(selectedData,initialUserId);
+		//System.out.println(adminService.updateUserAddBranch(initialUserId, selectedData.getUser_id()));
+		return "수정완료";
     }
 }

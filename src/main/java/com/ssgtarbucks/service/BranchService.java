@@ -2,7 +2,6 @@ package com.ssgtarbucks.service;
 
 import java.util.List;
 
-import com.ssgtarbucks.domain.IncomeDTO;
 import com.ssgtarbucks.domain.TotalDTO;
 import com.ssgtarbucks.domain.UserDTO;
 
