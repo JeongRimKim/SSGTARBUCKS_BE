@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 직원변경 시 branch_id가 없는 직원들만 불러오도록 함 -->
 	<select id="selectUserWithBranchIsNull" resultType="UserDTO">
 		SELECT * FROM user WHERE branch_id IS NULL;
-	</select>
+	</select> 
 		
 	<!-- 직원변경 시 새직원의 branch_id추가 -->	
 	<update id="updateUserAddBranch" parameterType="string">
