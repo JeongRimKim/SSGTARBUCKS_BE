@@ -21,4 +21,5 @@ public class QRCodeDTO {
 	Date qrcode_date;
 	String qrcode_type;
 	String qrcode_link;
+	String qrcode_value;
 }

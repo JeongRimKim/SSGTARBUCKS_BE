@@ -17,7 +17,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import io.swagger.models.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.common.util.concurrent.Service;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.WriterException;
 import com.ssgtarbucks.domain.QRCodeDTO;
@@ -42,7 +43,7 @@ import com.ssgtarbucks.service.UserService;
 
 
 
-@Controller
+@RestController
 @RequestMapping("/api/v1/qrcode")
 public class QRCodeController {
 
@@ -66,7 +67,6 @@ public class QRCodeController {
 	private QRCodeService qrCodeService;
 
 	@GetMapping("/search/{qrcode_id}")
-	@ResponseBody
 	public ResponseEntity<StorageDTO> search(@PathVariable("qrcode_id") int qrcode_id) {
 
 		System.out.println("QRCodeController - /search(GET) >>>");
@@ -79,33 +79,30 @@ public class QRCodeController {
 		return new ResponseEntity<>(responseData, header, HttpStatus.OK);
 	}
 	
-	//QR코드등록 -> 보관장소등록 (forward)
+	//보관장소등록 -> QR등록 (forward)
 	@PostMapping("/branch/location/new")
-	public ModelAndView registerLocation(@RequestBody(required = false) List<StockLocationDTO> list,
-			@RequestParam(required = false) String branch_id, HttpSession rttr) {
+	public ResponseEntity<StockLocationDTO>  registerLocation(@RequestBody(required = false) List<StockLocationDTO> list,
+			/* list : null -> TODO */ @RequestParam(required = false) String branch_id, HttpSession session) {
 
 		System.out.println("QRCodeController - /branch/location/new (Post) >>>" + list + "  " + branch_id);
-		rttr.setAttribute("list", list);
-		rttr.setAttribute("branch_id", branch_id);
+		System.out.println("Model>>>>>>>>>>>>" + session.getAttribute("list"));
+		
+		//QRcode등록
+		 List<StockLocationDTO> resList = (List<StockLocationDTO>) session.getAttribute("list");
+		 System.out.println("resList >>>>>>>>>>>>"+ resList);
+		 
+		 qrCodeService.insertQrcodeToRegisterLocation(resList);
+		
+		//list 삭제
+		session.invalidate();	
+		HttpHeaders header = new HttpHeaders();
+		header.add("Content-Type", "application/json;charset=UTF-8");
 
-		return new ModelAndView("forward:/api/v1/branch/location/new");
+		return new ResponseEntity<>(null, header, HttpStatus.OK);
+
 	}
 	
 	
-	
-	
-	
-	//QR코드등록 -> 보관장소등록 (forward)
-	@PostMapping("/branch/location/new2")
-	public ModelAndView registerLocation2(@RequestBody(required = false) List<StockLocationDTO> list,
-			@RequestParam(required = false) String branch_id,RedirectAttributes rttr) {
-
-		System.out.println("QRCodeController - /branch/location/new (Post) >>>" + list + "  " + branch_id);
-		rttr.addFlashAttribute("list",list);
-		rttr.addFlashAttribute("branch_id", branch_id);
-
-		return new ModelAndView("forward:/api/v1/branch/location/new");
-	}
 	
 
 }
