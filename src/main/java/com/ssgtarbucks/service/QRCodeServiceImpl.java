@@ -41,26 +41,17 @@ public class QRCodeServiceImpl implements QRCodeService {
 	public StorageDTO joinStroagebyQRCodeIdToSearch(int qrcode_id) {
 		return qrcodeRepository.joinStroagebyQRCodeIdToSearch(qrcode_id);
 	}
+
+	@Override
+	public Map<String, Object> generateQrCodeForLocation(StorageDTO storageDTO, int qrcode_id)
+			throws WriterException, IOException {
+		
+		return null;
+	}
 	
-	@Override
-	public Map<String, Object> generateQrCode(StorageDTO storageDTO, int qrcode_id)
-			throws WriterException, IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public Map<String, Object> generateQrCode2(StockLocationDTO stockLocationDTO, int qrcode_id)
-			throws WriterException, IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
-	@Override
-	public Map<String, Object> generateQrCode3() throws WriterException, IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 

@@ -7,40 +7,30 @@
 	<select id="joinStroagebyQRCodeIdToSearch" parameterType="_int"
 		resultType="StorageDTO">
 		SELECT
-		i.item_id,
-		i.item_code,
-		i.item_exp,
-		p.product_id,
-		p.product_name,
-		p.product_standard,
-		p.product_unit,
-		p.product_spec,
-		p.category_id,
-		q.qrcode_id,
-		q.qrcode_date,
-		s.stock_id,
-		s.stock_date,
-		s.branch_id,
-		s.stock_quantity,
-		sl.location_id,
-		sl.location_code,
-		sl.location_area,
-		sl.location_section,
-		sl.location_section_name,
-		sl.location_column,
-		sl.location_row,
-		sl.location_alias
-		from item i
-		join
-		product p on p.product_id = i.product_id
-		join stock s on s.item_id =
-		i.item_id
-		join stock_location sl on sl.location_id = s.location_id
-		join
-		qrcode q on q.qrcode_id = i.qrcode_id
-		where
-		q.qrcode_id = #{qrcode_id}
+			i.item_id, i.item_code,i.item_exp,p.product_id,	p.product_name,
+		p.product_standard,	p.product_unit,	p.product_spec,	p.category_id,	q.qrcode_id,
+		q.qrcode_date,s.stock_id,	s.stock_date, s.branch_id, s.stock_quantity,
+		sl.location_id,	sl.location_code,sl.location_area, sl.location_section,
+		sl.location_section_name,sl.location_column, sl.location_row, sl.location_alias
+		FROM item i 
+			join product p on p.product_id = i.product_id
+			join stock s on s.item_id =	i.item_id
+			join stock_location sl on sl.location_id = s.location_id
+			join qrcode q on q.qrcode_id = i.qrcode_id
+		WHERE q.qrcode_id = #{qrcode_id}
 	</select>
+	<!-- 보관장소등록 QRCode -->
+	<insert id="insertQrcodeToRegisterLocation" parameterType="QRCodeDTO">
+		INSERT INTO qrcode(qrcode_path,qrcode_date,qrcode_type)
+			VALUES (#{qrcode_path},(select curdate()),#{qrcode_type});
+	</insert>
+	
+	<!-- QR코드 갯수 id값 가져오기 -->
+	<select  id="selectQrcodeIdToCount" resultType="_int">
+		select count(*) from qrcode;
+	</select>
+	
+	
 
 </mapper>
 

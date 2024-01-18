@@ -93,4 +93,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where b.branch_id = #{branch_id}
 	</select>
 	
+	<!-- location_section 값 증가하기  -->
+	<select id="selectLocationSectionTofindMaxValue" parameterType="StockLocationDTO" resultType="int">
+		select COALESCE(MAX(CASE WHEN SUBSTRING(location_section, 1, 1) = #{location_section} THEN CAST(SUBSTRING(location_section, 2) AS SIGNED) END) + 1, 1)
+		from stock_location
+		where branch_id=#{branch_id}
+	</select>
+	
+	<!-- 보관장소 등록 -->
+	<insert id="insertStockLocation" parameterType="StockLocationDTO">
+	    INSERT INTO stock_location (
+	        location_area, location_section, location_section_name,
+	        location_column, location_row, location_alias, branch_id
+	    ) VALUES (
+	        #{location_area}, #{location_section}, #{location_section_name},
+	        #{location_column}, #{location_row}, #{location_alias}, #{branch_id}
+	    )
+	</insert>
+		
+	<!-- location_code 삽입 -->
+	<update id="updateLocationCode" parameterType="StockLocationDTO">
+		UPDATE stock_location
+			SET location_code = #{location_code}
+			WHERE branch_id = #{branch_id} AND location_section = #{location_section}
+	</update>
 </mapper>

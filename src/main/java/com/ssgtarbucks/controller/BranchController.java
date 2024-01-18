@@ -14,12 +14,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ssgtarbucks.domain.IncomeDTO;
 import com.ssgtarbucks.domain.StockLocationDTO;
@@ -33,7 +36,7 @@ import com.ssgtarbucks.service.UserService;
 import io.swagger.models.Model;
 
 
-@RestController
+@Controller
 @RequestMapping("/api/v1/branch")
 public class BranchController {
 
@@ -50,6 +53,7 @@ public class BranchController {
 	private BranchService branchService;
 	
 	@GetMapping("/main")
+	@ResponseBody
     public ResponseEntity<List<TotalDTO>> branch_main(@RequestParam String branch_id, 
     		@RequestParam(required = false, defaultValue = "#{T(java.time.LocalDate).now().toString()}")
     		@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) String curDate) { 
@@ -62,6 +66,7 @@ public class BranchController {
 	
 	
 	@GetMapping("/integrate/search")
+	@ResponseBody
     public ResponseEntity<List<TotalDTO>> search(@RequestParam String branch_id, String searchWord) { 
 		System.out.println("BranchController - /integrate/search(GET) >>>"+branch_id+"/"+searchWord);
 		
@@ -71,6 +76,7 @@ public class BranchController {
     }
 
 	@GetMapping("/info")
+	@ResponseBody
     public ResponseEntity<UserDTO> info(@RequestParam String branch_id) { 
 		System.out.println("BranchController - /info(GET) >>>"+branch_id);
 		
@@ -79,17 +85,20 @@ public class BranchController {
 		return ResponseEntity.ok(userDTO);
     }
 
-	// QR코드등록 -> 보관장소등록 (forward)
+	// 보관장소등록 -> QR등록 (forward)
 	@PostMapping("/location/new")
-	public ResponseEntity<StockLocationDTO> registerLocation(@RequestParam(required = false) String branch_id,
-			/* @ModelAttribute("list")*/@RequestParam(required = false) List<StockLocationDTO> list, HttpSession session) {
-		System.out.println("BranchController - /location/new(POST) >>>" + list + " " + branch_id);
-		System.out.println("Model>>>>>>>>>>>>" + session.getAttribute("list"));
+	public ModelAndView registerLocation(@RequestParam(required = false) String branch_id,
+		@RequestBody(required = false) List<StockLocationDTO> list, HttpSession session) {
+		System.out.println("BranchController - /location/new(POST) >>>" + list + " " + branch_id);		
+		//세션저장
+		session.setAttribute("list", list);
+		session.setAttribute("branch_id", branch_id);
 		
-		HttpHeaders header = new HttpHeaders();
-		header.add("Content-Type", "application/json;charset=UTF-8");
+		branchService.registerStockLocatioinWithTrans(list);
 		
-		return new ResponseEntity<>(null, header, HttpStatus.OK);
-
+		//QR등록으로 전달
+		return new ModelAndView("forward:/api/v1/qrcode/branch/location/new");	
 	}
+	
+
 }

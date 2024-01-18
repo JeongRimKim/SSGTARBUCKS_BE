@@ -12,7 +12,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Alias("StockLocationiDTO")
+@Alias("StockLocationDTO")
 public class StockLocationDTO {
 	String location_code;
 	String location_area;	
@@ -22,5 +22,5 @@ public class StockLocationDTO {
 	int location_row;	
 	String location_alias;	
 	int qrcode_id;	
-	int branch_id;	
+	String branch_id;	
 }
