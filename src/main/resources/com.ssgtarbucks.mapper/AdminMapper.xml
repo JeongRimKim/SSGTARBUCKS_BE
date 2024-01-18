@@ -59,5 +59,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update user set branch_id=null where user_id=#{user_id}
 	</update>
 
+	<!-- 내정보조회(관리자, 매니저 통합조회 ) -->
+	<select id="selectUserAndBranchInfo" parameterType="string" resultType="UserDTO">
+		select * from user u
+		join branch b on b.branch_id = u.branch_id
+		where b.branch_id = #{branch_id}
+	</select>
 	
 </mapper>
