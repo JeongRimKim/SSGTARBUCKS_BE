@@ -57,6 +57,11 @@ public class AdminServiceImpl implements AdminService {
 		return adminRepository.updateUserAddBranch(initial_id, user_id);
 	}
 
+	@Override
+	public UserDTO selectUserAndBranchInfo(String branch_id) {
+		return adminRepository.selectUserAndBranchInfo(branch_id);
+	}
+
 
 
 }

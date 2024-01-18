@@ -106,8 +106,6 @@ class BranchRepositoryTest {
 		dto.setLocation_area("FR");
 		dto.setLocation_section("E4");
 		dto.setLocation_section_name("상부장");
-		dto.setLocation_column(4);
-		dto.setLocation_row(5);
 		dto.setLocation_area("자동문옆상부장");
 		dto.setBranch_id("bid087");
 		int result = bmapper.insertStockLocation(dto);

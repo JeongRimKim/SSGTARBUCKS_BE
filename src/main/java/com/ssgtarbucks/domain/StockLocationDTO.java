@@ -18,8 +18,6 @@ public class StockLocationDTO {
 	String location_area;	
 	String location_section;	
 	String location_section_name;	
-	int location_column;	
-	int location_row;	
 	String location_alias;	
 	int qrcode_id;	
 	String branch_id;	

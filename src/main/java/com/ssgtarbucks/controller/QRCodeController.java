@@ -103,6 +103,19 @@ public class QRCodeController {
 	}
 	
 	
-	
+	@GetMapping("/inspection/income")
+	public String inspection(@RequestParam String branch_id) {
 
+		System.out.println("QRCodeController - /inspection/income(GET) >>>");
+
+		return null;
+	}
+
+	@GetMapping("/inspection/product")
+	public String inspectionProduct(@RequestParam String branch_id) {
+
+		System.out.println("QRCodeController - /inspection/product(GET) >>>");
+
+		return null;
+	}
 }

@@ -118,4 +118,13 @@ public class AdminController {
 		//System.out.println(adminService.updateUserAddBranch(initialUserId, selectedData.getUser_id()));
 		return "수정완료";
     }
+	
+	@GetMapping("/info")
+    public ResponseEntity<UserDTO> info(@RequestParam String branch_id) { 
+		System.out.println("AdminController - /info(GET) >>>"+branch_id);
+		
+		UserDTO userDTO = adminService.selectUserAndBranchInfo(branch_id);
+		
+		return ResponseEntity.ok(userDTO);
+    }
 }

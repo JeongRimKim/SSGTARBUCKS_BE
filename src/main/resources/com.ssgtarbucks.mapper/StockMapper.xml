@@ -15,8 +15,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    sl.location_area,
 			sl.location_section,
 		    sl.location_section_name,
-			sl.location_column,
-		    sl.location_row,
 		    sl.location_alias,
 			s.stock_id,
 		    s.stock_quantity,

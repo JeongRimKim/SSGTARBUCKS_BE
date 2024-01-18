@@ -14,4 +14,5 @@ public interface AdminRepository {
 	public List<UserDTO> selectUserWithBranchIsNull();
 	public int updateUserDeleteBranch(String user_id);
 	public int updateUserAddBranch(String initial_id, String user_id);
+	public UserDTO selectUserAndBranchInfo(String branch_id);
 }

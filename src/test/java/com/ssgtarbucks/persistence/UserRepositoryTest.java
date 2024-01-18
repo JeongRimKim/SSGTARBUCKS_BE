@@ -55,7 +55,6 @@ class UserRepositoryTest {
 		assertEquals(1, mapper.insertUserToJoin(dto));
 	}
 	
-	@Disabled
 	@Test
 	@Disabled
 	public void updateBCryptPW() throws Exception {
