@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ssgtarbucks.domain.IncomeDTO;
+import com.ssgtarbucks.domain.ProductDTO;
 import com.ssgtarbucks.domain.StockLocationDTO;
 import com.ssgtarbucks.domain.TotalDTO;
 import com.ssgtarbucks.domain.UserDTO;
@@ -17,4 +18,5 @@ public interface BranchRepository {
 	public int selectLocationSectionTofindMaxValue(StockLocationDTO dto);
 	public int insertStockLocation(StockLocationDTO dto);
 	public int updateLocationCode(StockLocationDTO dto);
+	public List<ProductDTO> joinProductFortotalProductQuantity(String branch_id);
 }

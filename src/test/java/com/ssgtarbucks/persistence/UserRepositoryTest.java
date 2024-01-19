@@ -40,7 +40,7 @@ class UserRepositoryTest {
 		log.info("====================================================\\n" + userDTO);
 	}
 	
-	
+	@Disabled
 	@Test
 	public void insertUserToJoin() throws Exception {
 		UserDTO dto = new UserDTO();

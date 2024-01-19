@@ -2,12 +2,15 @@ package com.ssgtarbucks.persistence;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.ssgtarbucks.domain.QRCodeDTO;
+import com.ssgtarbucks.domain.SearchDTO;
 import com.ssgtarbucks.domain.StockLocationDTO;
 
 import lombok.Setter;
@@ -55,7 +58,15 @@ class QrCodeRepositoryTest {
 		int result = mapper.updateLocationToAddQrcodeId(dto);
 		System.out.println("result : " + result);
 	}
-
+	
+	@Test
+	public void selectItemAndLocationToSearchbyQRcode() {
+		QRCodeDTO dto = new QRCodeDTO();
+		dto.setBranch_id("bid001");
+		dto.setQrcode_value("bid001-BA-A2");
+		List<SearchDTO> searchDtoList = mapper.selectItemAndLocationToSearchbyQRcode(dto);
+		System.out.println("검색결과 : " + searchDtoList);
+	}
 	
 	
 

@@ -20,5 +20,5 @@ public class StockLocationDTO {
 	String location_section_name;	
 	String location_alias;	
 	int qrcode_id;	
-	String branch_id;	
+	String branch_id;
 }

@@ -41,6 +41,9 @@ public class ProductDTO {
 	String location_section;
 	String location_section_name;
 	String location_alias;
+	
+	//총 갯수
+	int total_product_quantity;
 
 }
 
