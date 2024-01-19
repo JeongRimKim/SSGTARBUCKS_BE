@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.ssgtarbucks.domain.ProductDTO;
 import com.ssgtarbucks.domain.QRCodeDTO;
 import com.ssgtarbucks.domain.SearchDTO;
 import com.ssgtarbucks.domain.StockLocationDTO;
@@ -23,6 +24,8 @@ public interface QRCodeRepository {
 	int selectQrcodeIdToFind(String qrcode_value);
 
 	int updateLocationToAddQrcodeId(StockLocationDTO dto);
+	
+	ProductDTO selectProductByBranchId(String branch_id, String item_code);
 
 
 }
