@@ -22,4 +22,5 @@ public class QRCodeDTO {
 	String qrcode_type;
 	String qrcode_link;
 	String qrcode_value;
+	String branch_id;
 }

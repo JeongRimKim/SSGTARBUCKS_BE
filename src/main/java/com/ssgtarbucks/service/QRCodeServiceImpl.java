@@ -29,6 +29,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.ssgtarbucks.domain.QRCodeDTO;
+import com.ssgtarbucks.domain.SearchDTO;
 import com.ssgtarbucks.domain.StockLocationDTO;
 import com.ssgtarbucks.domain.StorageDTO;
 import com.ssgtarbucks.persistence.QRCodeRepository;
@@ -45,6 +46,11 @@ public class QRCodeServiceImpl implements QRCodeService {
 	@Override
 	public StorageDTO joinStroagebyQRCodeIdToSearch(int qrcode_id) {
 		return qrcodeRepository.joinStroagebyQRCodeIdToSearch(qrcode_id);
+	}
+	
+	@Override
+	public List<SearchDTO> selectItemAndLocationToSearchbyQRcode(QRCodeDTO qrcode_dto) {
+		return qrcodeRepository.selectItemAndLocationToSearchbyQRcode(qrcode_dto);
 	}
 
 	@Override
@@ -115,5 +121,8 @@ public class QRCodeServiceImpl implements QRCodeService {
 
 
 	}
+
+
+
 
 }
