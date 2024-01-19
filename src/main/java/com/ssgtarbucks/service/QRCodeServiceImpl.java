@@ -28,6 +28,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.ssgtarbucks.domain.ProductDTO;
 import com.ssgtarbucks.domain.QRCodeDTO;
 import com.ssgtarbucks.domain.StockLocationDTO;
 import com.ssgtarbucks.domain.StorageDTO;
@@ -114,6 +115,11 @@ public class QRCodeServiceImpl implements QRCodeService {
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>qrcodeValue("+ qrcodeValue +")로 QR코드 생성");
 
 
+	}
+
+	@Override
+	public ProductDTO selectProductByBranchId(String branch_id, String item_code) {
+		return qrcodeRepository.selectProductByBranchId(branch_id, item_code);
 	}
 
 }
