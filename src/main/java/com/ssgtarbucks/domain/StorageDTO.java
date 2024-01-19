@@ -18,10 +18,9 @@ public class StorageDTO {
 	String product_unit;
 	String product_spec;
 	String category_id;
+	String img_path;
 	
-	int qrcode_id;
-	Date qrcode_date;
-	
+
 	int stock_id;
 	int stock_quantity;
 	Date stock_date;

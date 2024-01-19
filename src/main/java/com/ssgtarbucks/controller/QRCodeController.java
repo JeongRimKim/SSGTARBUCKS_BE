@@ -33,6 +33,7 @@ import com.google.common.util.concurrent.Service;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.WriterException;
 import com.ssgtarbucks.domain.QRCodeDTO;
+import com.ssgtarbucks.domain.SearchDTO;
 import com.ssgtarbucks.domain.StockLocationDTO;
 import com.ssgtarbucks.domain.StorageDTO;
 import com.ssgtarbucks.domain.TokenDTO;
@@ -67,16 +68,20 @@ public class QRCodeController {
 	private QRCodeService qrCodeService;
 
 	@GetMapping("/search/{qrcode_value}")
-	public ResponseEntity<StorageDTO> search(@PathVariable("qrcode_value") String qrcode_value) {
+	public ResponseEntity<List<SearchDTO>> search(@PathVariable("qrcode_value") String qrcode_value,@RequestParam(required = false) String branch_id) {
 
 		System.out.println("QRCodeController - /search(GET) >>>");
 
 		HttpHeaders header = new HttpHeaders();
 		header.add("Content-Type", "application/json;charset=UTF-8");
-
-		System.out.println("qrcode 값 : "+qrcode_value);
-		StorageDTO responseData = qrCodeService.joinStroagebyQRCodeIdToSearch(1);
-
+		
+		QRCodeDTO dto = new QRCodeDTO();
+		dto.setBranch_id(branch_id);
+		dto.setQrcode_value(qrcode_value);
+		System.out.println("qrcode 값 : "+qrcode_value+ ", branch_id : "+ branch_id);
+		//StorageDTO responseData = qrCodeService.joinStroagebyQRCodeIdToSearch(1);
+		List<SearchDTO> responseData = qrCodeService.selectItemAndLocationToSearchbyQRcode(dto);
+		System.out.println("responseData"+responseData);
 		return new ResponseEntity<>(responseData, header, HttpStatus.OK);
 	}
 	

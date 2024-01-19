@@ -21,6 +21,32 @@
 	</select>
 	
 	
+	<!-- QR코드 통합검색  --> 
+	<select id="selectItemAndLocationToSearchbyQRcode" parameterType="QrCodeDTO" resultType="SearchDTO">
+		SELECT 
+		    p.product_id,   p.product_name,  p.product_standard, 
+		    p.product_unit,  c.category_name,  p.product_spec,
+			i.item_id,i.item_code,i.item_exp, img.image_path, 
+		    qr.qrcode_value as item_qrcode_value ,qr.qrcode_path as item_qrcode_path,
+			s.stock_quantity,  s.stock_date, sl.location_code,
+		    sl.location_section_name, sl.location_alias,
+			qrp.qrcode_value as location_qrcode_value,qrp.qrcode_path as location_qrcode_path
+		FROM product p 
+		JOIN item i ON p.product_id = i.product_id
+		JOIN stock s ON s.item_id = i.item_id
+		JOIN category c ON c.category_id = p.category_id
+		JOIN qrcode qr ON qr.qrcode_id=i.qrcode_id
+		JOIN image img on img.image_id = p.image_id
+		JOIN stock_location sl on s.location_id=sl.location_id
+		JOIN qrcode qrp ON qrp.qrcode_id=sl.qrcode_id
+		WHERE 
+		    (s.branch_id = #{branch_id} and qr.qrcode_value=#{qrcode_value})
+		    or
+		    (s.branch_id = #{branch_id} and qrp.qrcode_value=#{qrcode_value})
+		ORDER BY item_exp
+	</select>
+	
+	
 	<!-- 보관장소등록 QRCode -->
 	<insert id="insertQrcodeToRegisterLocation" parameterType="QRCodeDTO">
 		INSERT INTO qrcode(qrcode_path,qrcode_date,qrcode_type,qrcode_value)
