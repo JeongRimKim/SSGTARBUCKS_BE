@@ -73,6 +73,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateItemStatus" parameterType="int">
 		update item set item_status = 'sold out'  where item_id = #{item_id}
 	</update>
+	
+	
 
 
 </mapper>
