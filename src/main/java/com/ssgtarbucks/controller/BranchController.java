@@ -54,24 +54,30 @@ public class BranchController {
 	@Autowired
 	private BranchService branchService;
 	
-	@GetMapping("/main")
+	@GetMapping("/main/exp")
 	@ResponseBody
-    public ResponseEntity<List<TotalDTO>> branch_main(@RequestParam String branch_id, 
+   public ResponseEntity<List<TotalDTO>> branch_main(@RequestParam String branch_id, 
     		@RequestParam(required = false, defaultValue = "#{T(java.time.LocalDate).now().toString()}")
     		@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) String curDate) { 
 		System.out.println("BranchController - /main(GET) >>>"+branch_id+"/"+curDate);
 		
-		List<TotalDTO> totalList = branchService.selectExpirationDateList(branch_id,curDate);
-//		List<ProductDTO> lastProductList = branchService.joinProductFortotalProductQuantity(branch_id);
-//		System.out.println("TotalDTOList : " + totalList +"\n" );
-//		System.out.println("lastProductList : " + lastProductList +"\n" );
-//		MainResponseDTO responseDTO = new MainResponseDTO();
-//	    responseDTO.setTotalList(totalList);
-//	    responseDTO.setLastProductList(lastProductList);
-//	    return ResponseEntity.ok(responseDTO);	
-		
-		  return ResponseEntity.ok(totalList);	
+		List<TotalDTO> totalList = branchService.selectExpirationDateList(branch_id,curDate);	 
+	    return ResponseEntity.ok(totalList);	
     }
+	
+	@GetMapping("/main/remain")
+	@ResponseBody
+   public ResponseEntity<List<ProductDTO>> branch_main2(@RequestParam String branch_id){ 
+		System.out.println("BranchController - /main2(GET) >>>"+branch_id);
+		
+		List<ProductDTO> lastProductList = branchService.joinProductFortotalProductQuantity(branch_id);
+	
+		System.out.println("lastProductList : " + lastProductList +"\n" );	
+	    return ResponseEntity.ok(lastProductList);	
+    }
+	
+	
+	
 	
 	
 	@GetMapping("/integrate/search")
