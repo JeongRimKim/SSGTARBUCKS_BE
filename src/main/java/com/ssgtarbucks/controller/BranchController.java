@@ -63,13 +63,14 @@ public class BranchController {
 		
 		List<TotalDTO> totalList = branchService.selectExpirationDateList(branch_id,curDate);
 //		List<ProductDTO> lastProductList = branchService.joinProductFortotalProductQuantity(branch_id);
-//		System.out.println(totalList);
-//		 MainResponseDTO responseDTO = new MainResponseDTO();
+//		System.out.println("TotalDTOList : " + totalList +"\n" );
+//		System.out.println("lastProductList : " + lastProductList +"\n" );
+//		MainResponseDTO responseDTO = new MainResponseDTO();
 //	    responseDTO.setTotalList(totalList);
 //	    responseDTO.setLastProductList(lastProductList);
 //	    return ResponseEntity.ok(responseDTO);	
 		
-		return ResponseEntity.ok(totalList);	
+		  return ResponseEntity.ok(totalList);	
     }
 	
 	

@@ -74,7 +74,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update item set item_status = 'sold out'  where item_id = #{item_id}
 	</update>
 	
+	<!-- 수기 상품이동 - location_section 검색  -->
+	<select id="selectLocationToFindSection" parameterType="MoveItemDTO" resultType="String">
+		select location_section from stock_location 
+			where location_alias=#{location_alias}
+				and branch_id=#{branch_id}
+	</select>
 	
+	<!-- 수기 상품이동 - location_id 검색  -->
+	<select id="selectLocationToFindLocationId" parameterType="MoveItemDTO" resultType="int">
+		select location_id from stock_location where location_code=#{location_code}
+	</select>
+	
+	<!-- 수기 상품이동 - 이동 -->
+	<update id="updateStockByItemIdToMove" parameterType="MoveItemDTO">
+		UPDATE stock
+			SET location_id = #{location_code}
+		    WHERE branch_id=#{branch_id}
+				and item_id IN(
+				<foreach item="item" collection="list" separator="," >
+		        	#{item}
+		    	</foreach>
+		   		 )
+	</update>
 
-
+	
+	<!-- QR 상품이동 -->
+	<update  id="updateStockQByItemQRCodeToMove" parameterType="MoveQRItemDTO">
+		UPDATE stock
+			SET location_id=(select sl.location_id
+									from stock_location sl
+									join qrcode qr on qr.qrcode_id=sl.qrcode_id
+									where qr.qrcode_value=#{location_qrcode_value})
+			WHERE branch_id=#{branch_id}
+				and item_id IN(
+						<foreach item="item_qrcode_value" collection="list" separator="," >
+		        			(select item_id
+									from item i
+									join qrcode qr on qr.qrcode_id=i.qrcode_id
+									where qr.qrcode_value=#{item_qrcode_value})
+		    			</foreach>
+						)
+	</update>	
+	
+	
+	
 </mapper>

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.ssgtarbucks.domain.MoveItemDTO;
+import com.ssgtarbucks.domain.MoveQRItemDTO;
 import com.ssgtarbucks.domain.SaleDTO;
 import com.ssgtarbucks.domain.StockDTO;
 
@@ -24,5 +26,12 @@ public interface StockRepository {
 	
 	public int updateItemStatus(int item_id);
 
-		
+	public int updateStockByItemIdToMove(MoveItemDTO dto);
+
+	public int updateStockQByItemQRCodeToMove(MoveQRItemDTO dto);
+
+	public int selectLocationToFindLocationId(MoveItemDTO dto);
+
+	public String selectLocationToFindSection(MoveItemDTO dto);
+
 }

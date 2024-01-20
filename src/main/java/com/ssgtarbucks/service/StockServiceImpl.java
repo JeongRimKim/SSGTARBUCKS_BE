@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ssgtarbucks.domain.MoveItemDTO;
 import com.ssgtarbucks.domain.SaleDTO;
 import com.ssgtarbucks.domain.StockDTO;
 import com.ssgtarbucks.persistence.StockRepository;
@@ -50,5 +51,24 @@ public class StockServiceImpl implements StockService {
 	      }catch (Exception e){
 	   }		
 	}
+
+	@Override
+	public int updateStockByItemIdToMove(MoveItemDTO moveItemDTO) {
+		//별칭 -> location_section 조회
+		String location_section = stockRepository.selectLocationToFindSection(moveItemDTO);
+		moveItemDTO.setLocation_section(location_section);
+		//location_code로 파싱
+		//나중에 @로 변경!!
+		String location_code = moveItemDTO.getBranch_id()+"-"+ moveItemDTO.getLocation_area()+"-"+location_section;
+		moveItemDTO.setLocation_code(location_code);	
+		System.out.println("location_code : "+ location_code);
+		//location_id 조회
+		int location_id = stockRepository.selectLocationToFindLocationId(moveItemDTO);
+		System.out.println("location_id : " + location_id);
+		//장소이동
+		int result = stockRepository.updateStockByItemIdToMove(moveItemDTO);
+		System.out.println("장소이동 갯수 : "+ result);
+		return result;
+	};
 
 }
