@@ -2,9 +2,11 @@ package com.ssgtarbucks.service;
 
 import java.util.List;
 
+import com.ssgtarbucks.domain.IncomeDTO;
 import com.ssgtarbucks.domain.MoveItemDTO;
 import com.ssgtarbucks.domain.SaleDTO;
 import com.ssgtarbucks.domain.StockDTO;
+import com.ssgtarbucks.domain.StockLocationDTO;
 
 
 public interface StockService {
@@ -19,4 +21,11 @@ public interface StockService {
 
 	int updateStockByItemIdToMove(MoveItemDTO moveItemDTO);
 	
+	public List<IncomeDTO> selectInspectionListByBranchId(String branch_id);
+	
+	public StockLocationDTO selectStockLocationByLocationCode(String location_code);
+
+	public StockDTO selectStockByItemId(int item_id);
+	
+	public int updateStockLocation(int location_id, int item_id);
 }

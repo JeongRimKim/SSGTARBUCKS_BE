@@ -14,6 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Alias("StockLocationDTO")
 public class StockLocationDTO {
+	int location_id;
 	String location_code;
 	String location_area;	
 	String location_section;	

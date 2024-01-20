@@ -18,6 +18,8 @@ import lombok.ToString;
 public class StockDTO {
 	int stock_id;
 	int stock_quantity;
+	Date stock_date;
+	String branch_id;
 	
 	int location_id;
 	String location_code;
