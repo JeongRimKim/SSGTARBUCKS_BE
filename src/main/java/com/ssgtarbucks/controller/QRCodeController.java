@@ -32,6 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.common.util.concurrent.Service;
 import com.google.zxing.NotFoundException;
 import com.google.zxing.WriterException;
+import com.ssgtarbucks.domain.ProductDTO;
 import com.ssgtarbucks.domain.QRCodeDTO;
 import com.ssgtarbucks.domain.SearchDTO;
 import com.ssgtarbucks.domain.StockLocationDTO;
@@ -109,19 +110,5 @@ public class QRCodeController {
 	}
 	
 	
-	@GetMapping("/inspection/income")
-	public String inspection(@RequestParam String branch_id) {
 
-		System.out.println("QRCodeController - /inspection/income(GET) >>>");
-
-		return null;
-	}
- 
-	@GetMapping("/inspection/product")
-	public String inspectionProduct(@RequestParam String branch_id) {
-
-		System.out.println("QRCodeController - /inspection/product(GET) >>>");
-
-		return null;
-	}
 }

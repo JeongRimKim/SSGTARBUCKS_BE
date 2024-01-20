@@ -26,6 +26,7 @@ public class ProductDTO {
 	String category_name;
 	
 	int item_id;
+	String item_code;
 	Date item_exp;
 	int qrcode_id;
 	

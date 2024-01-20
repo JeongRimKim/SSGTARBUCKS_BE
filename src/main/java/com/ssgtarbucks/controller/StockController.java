@@ -73,7 +73,13 @@ public class StockController {
 
         return ResponseEntity.ok(null);
     }
-	
+
+	@PutMapping("/checked/inspection")
+	public ResponseEntity<List<SaleDTO>> inspectionList (@RequestParam String branch_id) { 
+		System.out.println("branch_id>>>>>>>>>>>>" + branch_id);
+
+        return ResponseEntity.ok(null);
+    }
 
 	
 }
