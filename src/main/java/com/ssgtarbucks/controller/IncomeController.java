@@ -36,10 +36,21 @@ public class IncomeController {
         return ResponseEntity.ok(incomeList);
     }
 	
-	@GetMapping("/list/inspection")
-	public ResponseEntity<List<IncomeDTO>> inspection(@RequestParam String incomeId) {
+	@GetMapping("/inspection")
+	public String inspection(String scanResult) {
 
-		System.out.println("QRCodeController - /inspection/income(GET) >>>"+incomeId);
+		System.out.println(scanResult);
+		String result [] = scanResult.split("@");
+		
+		
+		return result[1];
+	} 
+	
+	//@GetMapping("/list/inspection")
+	//public ResponseEntity<List<IncomeDTO>> listInspection(@RequestParam String incomeId) {
+	@GetMapping("/list/inspection/{incomeId}")
+	public ResponseEntity<List<IncomeDTO>> listInspection(@PathVariable String incomeId) {
+		System.out.println("IncomeController - /list/inspection(GET) >>>"+incomeId);
 		
 		List<IncomeDTO> incomeList = incomeService.selectIncomeListByIncomeId(incomeId);
 		
@@ -52,8 +63,8 @@ public class IncomeController {
 		String returnValue = "실패";
 		String [] result = scanResult.split("@");
 		
-		System.out.println("QRCodeController - /inspection/product(GET) >>>"+result[1]);
-		System.out.println("QRCodeController - /inspection/product(GET) >>>"+itemCode);
+		System.out.println("IncomeController - /inspection/product(GET) >>>"+result[1]);
+		System.out.println("IncomeController - /inspection/product(GET) >>>"+itemCode);
 
 		ItemDTO scanItemDTO = incomeService.selectItemAllByItemCode(result[1]);
 		ItemDTO originItemDTO = incomeService.selectItemAllByItemCode(itemCode);
@@ -94,9 +105,7 @@ public class IncomeController {
 					int insertStockResult = incomeService.insertStockItem(branch_id, incomeDTO.getItem_id());
 				}
 				int updateItemStatus = incomeService.updateItemStatus(incomeDTO.getItem_id());
-
 			}
-			
 		}
 		
 		int result =  incomeService.updateIncomeStatus(incomeId);
