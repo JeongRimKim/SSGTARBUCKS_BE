@@ -117,6 +117,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						)
 	</update>	
 	
+	<!-- 검수상품 보관장소 등록 - 검수내역 중 승인내역 목록 불러오기 -->
+	<select id="selectInspectionListByBranchId" parameterType="string" resultType="IncomeDTO" >
+		select 
+			i.income_id,
+		    i.income_date,
+		    i.income_amount,
+		    i.income_status,
+		    i.branch_id,
+		    il.income_list_id,
+		    il.income_list_quantity,
+		    il.income_list_result,
+		    il.item_id,
+		    
+		    item.item_exp,
+		    p.product_name
+		from income i
+		join income_list il on il.income_id = i.income_id
+		join item item on item.item_id = il.item_id
+		join product p on item.product_id = p.product_id
+		join stock s on s.item_id = item.item_id
+        left join stock_location sl on sl.location_id = s.location_id
+		where i.income_status = "입고전" and il.income_list_result="승인" and i.branch_id = #{branch_id}  and sl.location_id is null
+	</select>
 	
+	<!-- 검수상품 보관장소 등록 -스캔한 보관장소 정보 받아오기 -->
+	<select id="selectStockLocationByLocationCode" parameterType="string" resultType="StockLocationDTO">
+		select * from stock_location where location_code = #{location_code}
+	</select>
+	
+	<!-- 검수상품 보관장소 등록 - 해당 상품의 재고정보 받아오기 -->
+	<select id="selectStockByItemId" parameterType="int" resultType="StockDTO">
+		select * from stock where item_id = #{item_id}
+	</select>
+	
+	<!-- 검수상품 보관장소 등록  - 신규상품 보관장소 등록 -->
+	<insert id="updateStockLocation" parameterType="int">
+		update stock set location_id = #{location_id} where item_id = #{item_id}
+	</insert>
 	
 </mapper>

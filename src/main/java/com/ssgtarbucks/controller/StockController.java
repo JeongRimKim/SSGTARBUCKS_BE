@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssgtarbucks.domain.IncomeDTO;
 import com.ssgtarbucks.domain.MoveItemDTO;
 import com.ssgtarbucks.domain.SaleDTO;
 import com.ssgtarbucks.domain.StockDTO;
+import com.ssgtarbucks.domain.StockLocationDTO;
 import com.ssgtarbucks.service.StockService;
 
 @RestController
@@ -74,12 +76,29 @@ public class StockController {
         return ResponseEntity.ok(null);
     }
 
-	@PutMapping("/checked/inspection")
-	public ResponseEntity<List<SaleDTO>> inspectionList (@RequestParam String branch_id) { 
+	@GetMapping("/checked/inspection")
+	public ResponseEntity<List<IncomeDTO>> inspectionList (@RequestParam String branch_id) { 
 		System.out.println("branch_id>>>>>>>>>>>>" + branch_id);
+
+		List<IncomeDTO> inspectionList = stockService.selectInspectionListByBranchId(branch_id);
+		
+		System.out.println(inspectionList);
+		
+        return ResponseEntity.ok(inspectionList);
+    }
+
+	@GetMapping("/checked/insert/location")
+	public ResponseEntity<List<IncomeDTO>> insertLocation (@RequestParam String scanResult, @RequestParam int item_id) { 
+		System.out.println("branch_id>>>>>>>>>>>>" + scanResult+"|"+item_id);
+		
+		StockLocationDTO stockLocationDTO = stockService.selectStockLocationByLocationCode(scanResult);
+		
+		StockDTO stockDTO = stockService.selectStockByItemId(item_id);
+		
+		int result1 = stockService.updateStockLocation(stockLocationDTO.getLocation_id(), item_id);
+		System.out.println(stockLocationDTO);
 
         return ResponseEntity.ok(null);
     }
-
 	
 }

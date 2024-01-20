@@ -96,11 +96,11 @@ public class IncomeController {
 				//int result1 = incomeService.selectSameItemCount(item_code[1],incomeDTO.getItem_exp() );
 				int result2 = incomeService.selectSameProductCount(item_code[1]);
 				
-				//같은 상품번호를 가진 재고가 있음
+				//같은 상품번호를 가진 재고가 있음 (입고완료인데 검수전상품)
 				if(result2>0) {
 					int updateStockResult = incomeService.updateIncomeListResult(incomeDTO.getItem_id());
 					
-				//같은 상품번호를 가진 재고가 없음
+				//같은 상품번호를 가진 재고가 없음 (입고전+검수전)
 				}else {
 					int insertStockResult = incomeService.insertStockItem(branch_id, incomeDTO.getItem_id());
 				}
