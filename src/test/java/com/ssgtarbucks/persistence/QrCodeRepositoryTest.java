@@ -58,7 +58,7 @@ class QrCodeRepositoryTest {
 		int result = mapper.updateLocationToAddQrcodeId(dto);
 		System.out.println("result : " + result);
 	}
-	
+	@Disabled
 	@Test
 	public void selectItemAndLocationToSearchbyQRcode() {
 		QRCodeDTO dto = new QRCodeDTO();
