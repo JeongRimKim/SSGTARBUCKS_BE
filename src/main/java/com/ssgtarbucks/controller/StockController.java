@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssgtarbucks.domain.MoveItemDTO;
 import com.ssgtarbucks.domain.SaleDTO;
 import com.ssgtarbucks.domain.StockDTO;
 import com.ssgtarbucks.service.StockService;
@@ -72,5 +73,7 @@ public class StockController {
 
         return ResponseEntity.ok(null);
     }
+	
+
 	
 }
