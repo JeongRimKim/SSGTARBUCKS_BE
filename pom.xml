@@ -13,6 +13,7 @@
 	<artifactId>awesomebeans_be</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ssginc_ssgtarbucks</name>
+	<packaging>war</packaging>
 	<description>ssginc kdt project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
@@ -132,6 +133,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>ssgtarbucks_BE</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
