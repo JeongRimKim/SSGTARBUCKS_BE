@@ -115,5 +115,15 @@ public class BranchController {
 		return new ModelAndView("forward:/api/v1/qrcode/branch/location/new");	
 	}
 	
+	// 보관장소내역
+	@GetMapping("/location/list")
+	public ResponseEntity<List<StockLocationDTO>> showLocation(@RequestParam(required = false) String branch_id) {
+		System.out.println("BranchController - /location/list(GET) >>>" + branch_id);		
+			
+		List<StockLocationDTO> locationList = branchService.selectLocaitonToShow(branch_id);
+			
+		return ResponseEntity.ok(locationList);
+	}
+	
 
 }

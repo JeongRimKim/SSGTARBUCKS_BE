@@ -19,4 +19,6 @@ public interface BranchRepository {
 	public int insertStockLocation(StockLocationDTO dto);
 	public int updateLocationCode(StockLocationDTO dto);
 	public List<ProductDTO> joinProductFortotalProductQuantity(String branch_id);
+	public List<StockLocationDTO> selectLocaitonToShowList(String string);
+	public List<StockLocationDTO> selectLocaitonToShow(String string);
 }
