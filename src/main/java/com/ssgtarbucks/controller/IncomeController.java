@@ -93,18 +93,22 @@ public class IncomeController {
 			//승인된 재고 중
 			if(incomeDTO.getIncome_list_result().equals("승인")) {
 				String[] item_code = incomeDTO.getItem_code().split("_");
-				//int result1 = incomeService.selectSameItemCount(item_code[1],incomeDTO.getItem_exp() );
-				int result2 = incomeService.selectSameProductCount(item_code[1]);
+				int result1 = incomeService.selectSameItemCount(item_code[0],incomeDTO.getItem_exp() );
+				//int result2 = incomeService.selectSameProductCount(item_code[0]);
+				System.out.println("같은 품목 개수::::::::::::::::::::::::::::"+item_code[0]+"/"+result1);
 				
-				//같은 상품번호를 가진 재고가 있음 (입고완료인데 검수전상품)
-				if(result2>0) {
-					int updateStockResult = incomeService.updateIncomeListResult(incomeDTO.getItem_id());
+				//같은 상품번호를 가진 재고가 있음 (입고완료인데 검수전상품)->같은아이템아이디를 가진 재고는 없다고 가정
+				if(result1>0) {
+					//int updateStockResult = incomeService.updateIncomeListResult(incomeDTO.getItem_id());
+					System.out.println("같은 품목 개수가 있음::::::::::::::::::::"+result1);
+					int updateItemStatus = incomeService.updateItemStatus(incomeDTO.getItem_id(), "보관");
 					
 				//같은 상품번호를 가진 재고가 없음 (입고전+검수전)
 				}else {
 					int insertStockResult = incomeService.insertStockItem(branch_id, incomeDTO.getItem_id());
+					System.out.println("같은 품목 개수가 없음::::::::::::::::::::"+result1);
+					int updateItemStatus = incomeService.updateItemStatus(incomeDTO.getItem_id(), "입고전");
 				}
-				int updateItemStatus = incomeService.updateItemStatus(incomeDTO.getItem_id());
 			}
 		}
 		
@@ -113,5 +117,8 @@ public class IncomeController {
 		return null;
 		
 	}
+	
+	
+	
 	
 }

@@ -62,8 +62,8 @@ public class IncomeServiceImpl implements IncomeService {
 	}
 
 	@Override
-	public int updateItemStatus(int item_id) {
-		return incomeRepository.updateItemStatus(item_id);
+	public int updateItemStatus(int item_id,String item_status) {
+		return incomeRepository.updateItemStatus(item_id,item_status);
 	}
 
 }

@@ -95,6 +95,12 @@ public class StockServiceImpl implements StockService {
 	@Override
 	public int updateStockLocation(int location_id, int item_id) {
 		return stockRepository.updateStockLocation(location_id, item_id);
+	}
+
+
+	@Override
+	public List<StockLocationDTO> selectStockLocationByBranchId(String branch_id) {
+		return stockRepository.selectStockLocationByBranchId(branch_id);
 	};
 
 	

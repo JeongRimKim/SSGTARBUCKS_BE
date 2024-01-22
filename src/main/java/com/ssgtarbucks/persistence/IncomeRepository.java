@@ -20,5 +20,5 @@ public interface IncomeRepository {
 	public int insertStockItem(String branch_id, int item_id);
 	public int updateStockQuantity(int item_id);
 	public int updateIncomeStatus(String income_id);
-	public int updateItemStatus(int item_id);
+	public int updateItemStatus(int item_id, String item_status);
 }

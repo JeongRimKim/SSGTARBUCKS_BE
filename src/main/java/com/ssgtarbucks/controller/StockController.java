@@ -87,8 +87,9 @@ public class StockController {
         return ResponseEntity.ok(inspectionList);
     }
 
-	@GetMapping("/checked/insert/location")
-	public ResponseEntity<List<IncomeDTO>> insertLocation (@RequestParam String scanResult, @RequestParam int item_id) { 
+	//QR코드
+	@GetMapping("/checked/insert/location/qr")
+	public ResponseEntity<List<IncomeDTO>> insertLocationQR (@RequestParam String scanResult, @RequestParam int item_id) { 
 		System.out.println("branch_id>>>>>>>>>>>>" + scanResult+"|"+item_id);
 		
 		StockLocationDTO stockLocationDTO = stockService.selectStockLocationByLocationCode(scanResult);
@@ -99,6 +100,24 @@ public class StockController {
 		System.out.println(stockLocationDTO);
 
         return ResponseEntity.ok(null);
+    }
+	
+	//수기
+	@GetMapping("/checked/insert/location")
+	public ResponseEntity<List<IncomeDTO>> insertLocation (@RequestParam int location_id, @RequestParam int item_id) { 
+		System.out.println("/checked/insert/location>>>>>>>>>>>>"+location_id+item_id);
+
+		int result = stockService.updateStockLocation(location_id, item_id);
+		
+        return ResponseEntity.ok(null);
+    }
+	
+	@GetMapping("/checked/show/location")
+	public ResponseEntity<List<StockLocationDTO>> selectStockLocationList (@RequestParam String branch_id) { 
+
+		List<StockLocationDTO> stockLocationList = stockService.selectStockLocationByBranchId(branch_id);
+		
+        return ResponseEntity.ok(stockLocationList);
     }
 	
 }

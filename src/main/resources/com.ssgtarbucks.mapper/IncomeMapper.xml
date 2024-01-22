@@ -79,19 +79,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where p.product_code = #{item_code}
 	</select>
 	
+	<!-- 재고목록추가 -->
 	<insert id="insertStockItem">
 		insert stock (stock_quantity, stock_date, branch_id, item_id, location_id) values(1, curdate(), #{branch_id}, #{item_id}, null)
 	</insert>
 	
+	<!-- 재고 수량 추가 -->
 	<update id="updateStockQuantity" parameterType="int">
 		update stock set stock_quantity =stock_quantity+1 where item_id = #{item_id}
 	</update>
 	
+	<!-- 입고상태 변경 -->
 	<update id="updateIncomeStatus" parameterType="string">
 		update income set income_status = "입고전" where income_id = #{income_id}
 	</update>
 	
-	<update id="updateItemStatus" parameterType="int">	
-		update item set item_status = "입고전(검수완료)" where item_id = #{item_id}
+	<!-- 상품상태변경 -->
+	<update id="updateItemStatus" >	
+		update item set item_status = #{item_status} where item_id = #{item_id}
 	</update>
 </mapper>
