@@ -14,5 +14,5 @@ public interface BranchService {
 	public UserDTO selectUserAndBranchInfo(String branch_id);
 	public void registerStockLocatioinWithTrans(List<StockLocationDTO> locationDTOList);
 	public List<ProductDTO> joinProductFortotalProductQuantity(String branch_id);
-
+	public List<StockLocationDTO> selectLocaitonToShow(String string);
 }

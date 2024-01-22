@@ -120,4 +120,14 @@ public class StockController {
         return ResponseEntity.ok(stockLocationList);
     }
 	
+	
+	@PutMapping("/location/move")
+	public ResponseEntity<List<SaleDTO>> moveItems (@RequestParam String branch_id, @RequestBody MoveItemDTO moveItemDTO) { 
+		System.out.println("StockController - /stock/location/move(put) >>> MoveItemDTO :" + moveItemDTO);
+		
+		int result = stockService.updateStockByItemIdToMove(moveItemDTO);
+		
+        return ResponseEntity.ok(null);
+    }
+	
 }

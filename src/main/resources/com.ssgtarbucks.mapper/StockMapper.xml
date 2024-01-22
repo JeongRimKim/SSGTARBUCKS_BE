@@ -98,7 +98,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		   		 )
 	</update>
 
-	
 	<!-- QR 상품이동 -->
 	<update  id="updateStockQByItemQRCodeToMove" parameterType="MoveQRItemDTO">
 		UPDATE stock

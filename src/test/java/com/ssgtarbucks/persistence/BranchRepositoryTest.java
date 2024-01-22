@@ -117,9 +117,18 @@ class BranchRepositoryTest {
 	}
 	
 	@Test
+	@Disabled
 	public void joinProductFortotalProductQuantity() {
 		List<ProductDTO> pList = bmapper.joinProductFortotalProductQuantity("bid001");
 		log.info("결과>>>>"+ pList);
 	}
 	
+	
+
+	@Test
+	public void selectLocaitonToShowList() {
+		List<StockLocationDTO> sList = bmapper.selectLocaitonToShow("bid001");
+		log.info("결과 > "+sList);
+		
+	}
 }

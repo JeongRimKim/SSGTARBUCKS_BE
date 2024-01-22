@@ -35,6 +35,9 @@ public class BranchServiceImpl implements BranchService {
 		return branchRepository.selectUserAndBranchInfo(branch_id);
 	}
 
+	
+
+	
 	// 장소등록 및 location_code 트랜잭션 처리
 	@Transactional
 	@Override
@@ -85,6 +88,13 @@ public class BranchServiceImpl implements BranchService {
 	public List<ProductDTO> joinProductFortotalProductQuantity(String branch_id) {
 		return branchRepository.joinProductFortotalProductQuantity(branch_id);
 	}
+
+	@Override
+	public List<StockLocationDTO> selectLocaitonToShow(String branch_id) {
+		return branchRepository.selectLocaitonToShow(branch_id);
+	}
+	
+
 
 
 }

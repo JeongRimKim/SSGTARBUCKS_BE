@@ -164,7 +164,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 
 	
-	
-
+	<!-- 장소내역 조회 -->
+	<select id="selectLocaitonToShow" parameterType="String" resultType="StockLocationDTO">
+		select * from stock_location where branch_id=#{branch_id}
+	</select>
 	
 </mapper>
