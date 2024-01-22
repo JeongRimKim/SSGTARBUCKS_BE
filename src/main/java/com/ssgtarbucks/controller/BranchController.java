@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ssgtarbucks.domain.IncomeDTO;
-import com.ssgtarbucks.domain.MainResponseDTO;
 import com.ssgtarbucks.domain.ProductDTO;
 import com.ssgtarbucks.domain.StockLocationDTO;
 import com.ssgtarbucks.domain.TokenDTO;
