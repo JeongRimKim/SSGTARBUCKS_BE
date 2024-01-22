@@ -28,4 +28,7 @@ public interface StockService {
 	public StockDTO selectStockByItemId(int item_id);
 	
 	public int updateStockLocation(int location_id, int item_id);
+	
+	public List<StockLocationDTO> selectStockLocationByBranchId(String branch_id);
+
 }

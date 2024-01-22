@@ -28,11 +28,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    i.item_code,
 		    i.item_exp
 		FROM
-		    item i
-		JOIN product p ON i.product_id = p.product_id
-		JOIN stock s ON s.item_id = i.item_id
-		JOIN stock_location sl ON sl.location_id = s.location_id
-		where  s.branch_id=#{branch_id}
+			stock_location sl
+		left Join stock s on s.location_id = sl.location_id
+		left JOIN item i  ON s.item_id = i.item_id
+        left join product p on p.product_id = i.product_id
+		where  sl.branch_id= #{branch_id}
 		order by sl.location_id
 	</select>
 	
@@ -152,8 +152,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 검수상품 보관장소 등록  - 신규상품 보관장소 등록 -->
-	<insert id="updateStockLocation" parameterType="int">
+	<update id="updateStockLocation" parameterType="int">
 		update stock set location_id = #{location_id} where item_id = #{item_id}
-	</insert>
+	</update>
 	
+	<!-- 검수상품 보관장소 등록 - 수기: 해당매장의 저장장소 목록 불러오기 -->
+	<select id="selectStockLocationByBranchId" parameterType="string" resultType="StockLocationDTO">
+		select * from stock_location where branch_id = #{branch_id}
+	</select>
+
 </mapper>
