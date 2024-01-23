@@ -108,6 +108,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	        #{location_area}, #{location_section}, #{location_section_name},#{location_alias}, #{branch_id}
 	    )
 	</insert>
+	
+	
 		
 	<!-- location_code 삽입 -->
 	<update id="updateLocationCode" parameterType="StockLocationDTO">
@@ -161,12 +163,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		Order By  total_product_quantity;
 		 ]]> 
 	</select> 
-	
-
-	
+		
 	<!-- 장소내역 조회 -->
 	<select id="selectLocaitonToShow" parameterType="String" resultType="StockLocationDTO">
 		select * from stock_location where branch_id=#{branch_id}
 	</select>
+	
+	<!-- 보관장소삭제 -->
+	<delete id="deleteLocation" parameterType="StockLocationDTO">
+		delete from stock_location where location_id=#{location_id} and branch_id=#{branch_id}
+	</delete>
 	
 </mapper>
