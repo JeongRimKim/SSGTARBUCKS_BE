@@ -21,4 +21,5 @@ public interface BranchRepository {
 	public List<ProductDTO> joinProductFortotalProductQuantity(String branch_id);
 	public List<StockLocationDTO> selectLocaitonToShowList(String string);
 	public List<StockLocationDTO> selectLocaitonToShow(String string);
+	public int deleteLocation(StockLocationDTO dto);
 }
