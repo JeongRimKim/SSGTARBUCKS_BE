@@ -118,7 +118,6 @@ public class BranchController {
 	public ResponseEntity<Integer> deleteLocation(@RequestHeader(name = "branch_id", required = false) String branch_id,
 			@PathVariable("location_id") int location_id){
 			System.out.println("BranchController - /location/{location_id}(delete) >>>" + branch_id + ",  "+location_id);
-			//Header Param으로 받음
 			StockLocationDTO dto = new StockLocationDTO();
 			dto.setBranch_id(branch_id);
 			dto.setLocation_id(location_id);
