@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,14 +20,28 @@ import com.ssgtarbucks.domain.UserDTO;
 import com.ssgtarbucks.jwt.JwtUtil;
 import com.ssgtarbucks.service.UserService;
 
+import net.nurigo.sdk.NurigoApp;
+import net.nurigo.sdk.message.model.Message;
+import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
+import net.nurigo.sdk.message.response.SingleMessageSentResponse;
+import net.nurigo.sdk.message.service.DefaultMessageService;
+
 
 @RestController
 @RequestMapping("/api/v1")
 public class UserController {
+	
+    final DefaultMessageService messageService;
 
+    public UserController() {
+        this.messageService = NurigoApp.INSTANCE.initialize("NCSBIKQJI5XRR46N", "Z8MREVCZEFS2BMVFLDOOOHYD0GDJGZHT", "https://api.coolsms.co.kr");
+
+    }
+    
+    
 	@Autowired
 	AuthenticationManagerBuilder authenticationManagerBuilder;
-
+	
 	@Autowired
 	JwtUtil jwtUtil;
 
@@ -35,6 +50,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
 
 	@PostMapping("/user/login")
 	public ResponseEntity<TokenDTO> login(@RequestBody UserDTO userDTO) {
@@ -64,12 +80,53 @@ public class UserController {
 		return new ResponseEntity<>(tokenDTO, httpHeaders, HttpStatus.OK);
 	}
 	
-	@PostMapping("/user/signup")
-    public ResponseEntity<UserDTO> signup(@RequestBody UserDTO userDTO) { // 회원 가입
-		System.out.println("UserController - /user/signup(POST) >>> userDTO : " + userDTO);
-    		// PW 테스트용 생성
-           // userService.signup(userDTO);
-  
-        return ResponseEntity.ok(userDTO);
+	@PostMapping("/user/find")
+    public ResponseEntity<UserDTO> find(@RequestBody UserDTO userDTO) { //비밀번호찾기
+		System.out.println("UserController - /user/find(POST) >>> userDTO : " + userDTO);
+        Message message = new Message();
+        message.setFrom("01084037635");
+        message.setTo(userDTO.getUser_phone());
+
+		if(userDTO.getAuth_code()==null) {
+			System.out.println("리액트에서 보낸 인증코드:"+userDTO.getAuth_code());
+			
+			
+			
+		}else {
+			//입력한 id,email일치하는 사람 있는지 조회
+			int count = userService.selectCountToFindUserExist(userDTO);
+			System.out.println(count);
+			
+			//일치하는 사원있음
+			if(count>0) {
+				userService.deleteTempCodeByUserId(userDTO.getUser_id());
+				System.out.println("문자인증보냄");
+				String tempPw = userService.generateTempPw();
+				System.out.println(tempPw);
+		        message.setText("[SSGtarbucks]비밀번호 찾기 인증번호 => ["+tempPw+"]");
+		        userService.insertTempCode(tempPw, userDTO.getUser_id());
+		        SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+
+			}
+		}
+		
+        return ResponseEntity.ok(null);
+    }
+	
+	@PostMapping("/user/verify")
+    public ResponseEntity<String> verify(@RequestBody UserDTO userDTO) {
+		String returnValue = "실패";
+		System.out.println("UserController - /user/varify(POST) >>> userDTO : " + userDTO);
+		
+		String savedTempCode = userService.selectTempCodeByUserId(userDTO.getUser_id());
+		
+		if(savedTempCode.equals(userDTO.getAuth_code())) {
+			returnValue = "성공";
+			userDTO.setUser_pw(new BCryptPasswordEncoder().encode(userDTO.getUser_id()));
+			int result = userService.updateUserByUserIdToChgPW(userDTO);
+			userService.deleteTempCodeByUserId(userDTO.getUser_id());
+		}
+		
+		return ResponseEntity.ok(returnValue);
     }
 }
