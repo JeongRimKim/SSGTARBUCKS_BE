@@ -82,14 +82,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 수기 상품이동 - location_id 검색  -->
-	<select id="selectLocationToFindLocationId" parameterType="MoveItemDTO" resultType="int">
+	<select id="selectLocationToFindLocationId" parameterType="MoveItemDTO" resultType="_int">
 		select location_id from stock_location where location_code=#{location_code}
 	</select>
 	
 	<!-- 수기 상품이동 - 이동 -->
 	<update id="updateStockByItemIdToMove" parameterType="MoveItemDTO">
 		UPDATE stock
-			SET location_id = #{location_code}
+			SET location_id = #{location_id}
 		    WHERE branch_id=#{branch_id}
 				and item_id IN(
 				<foreach item="item" collection="list" separator="," >

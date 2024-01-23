@@ -42,7 +42,6 @@ class StockRepositoryTest {
 		log.info("\n section : " + result);
 	}
 	
-	@Disabled
 	@Test
 	public void selectLocationToFindLocationId() {
 		MoveItemDTO dto = new MoveItemDTO();
@@ -60,7 +59,7 @@ class StockRepositoryTest {
 		List<Integer> list = new ArrayList<>();
 		list.add(13792);
 		list.add(3670);
-		dto.setItem_list(list);
+//		dto.setItem_list(list);
 		int result = smapper.updateStockByItemIdToMove(dto);
 		log.info("\n 이동 결과 : " + result);
 	}
@@ -71,10 +70,7 @@ class StockRepositoryTest {
 		MoveQRItemDTO dto = new MoveQRItemDTO();
 		dto.setBranch_id("bid001");
 		dto.setLocation_qrcode_value("bid001-FR-B3");
-		List<String> list = new ArrayList<>();
-		list.add("2024-06-07@sj_065");
-		list.add("2024-06-07@mtc_007");
-		dto.setItem_qrcode_value_list(list);
+		dto.setItem_qrcode_value("2024-06-07@sj_065");
 		int result = smapper.updateStockQByItemQRCodeToMove(dto);
 		log.info("\n 이동 결과 : " + result);
 		
