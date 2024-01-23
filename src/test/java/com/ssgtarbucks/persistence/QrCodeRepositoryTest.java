@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.ssgtarbucks.domain.MoveQRItemDTO;
+import com.ssgtarbucks.domain.OutcomeQRItemDTO;
 import com.ssgtarbucks.domain.QRCodeDTO;
 import com.ssgtarbucks.domain.SearchDTO;
 import com.ssgtarbucks.domain.StockLocationDTO;
@@ -67,6 +69,108 @@ class QrCodeRepositoryTest {
 		List<SearchDTO> searchDtoList = mapper.selectItemAndLocationToSearchbyQRcode(dto);
 		System.out.println("검색결과 : " + searchDtoList);
 	}
+	
+	@Disabled
+	@Test
+	public void selectQRToFindLocationIDByLocQRValue() {
+		MoveQRItemDTO dto = new MoveQRItemDTO();
+		dto.setBranch_id("bid001");
+		dto.setLocation_qrcode_value("bid001-FR-A5");
+		int location_id = mapper.selectQRToFindLocationIDByLocQRValue(dto);
+		System.out.println("검색결과 : " + location_id);
+	}
+	@Disabled
+	@Test
+	public void selectQRToFindItemIDByItemQRValue() {
+		MoveQRItemDTO dto = new MoveQRItemDTO();
+		dto.setItem_qrcode_value("2024-06-07@sj_065");
+		int item_id = mapper.selectQRToFindItemIDByItemQRValue(dto);
+		System.out.println("검색결과 : " + item_id);
+	}
+	
+	@Disabled
+	@Test
+	public void updateStockToMoveQR() {
+		MoveQRItemDTO dto = new MoveQRItemDTO();
+		dto.setBranch_id("bid001");
+		dto.setLocation_id(1);
+		dto.setItem_id(13792);
+		int count = mapper.updateStockToMoveQR(dto);
+		System.out.println("수정결과(1) : " + count);
+	}
+	
+	@Disabled
+	@Test
+	public void selectItemIdForOutcomeItemByItemQR() {
+		OutcomeQRItemDTO dto = new OutcomeQRItemDTO();
+		dto.setQrcode_value("2024-04-05@phj_061");
+		dto.setBranch_id("bid001");
+		int item_id = mapper.selectItemIdForOutcomeItemByItemQR(dto);
+		log.info("item_id : "+ item_id);
+	}
+	
+	@Disabled
+	@Test
+	public void updateStockCountForOutcomeItemByitemId() {
+		OutcomeQRItemDTO dto = new OutcomeQRItemDTO();
+		dto.setBranch_id("bid001");
+		dto.setItem_id(5910);
+		int result = mapper.updateStockCountForOutcomeItemByitemId(dto);
+		log.info("result : "+ result);
+	}
+	
+	@Disabled
+	@Test
+	public void selectOutcomeIdForFindOutcomeCode() {
+		long outcome_code = mapper.selectOutcomeIdForFindOutcomeCode();
+		log.info("outcome_code : "+ outcome_code);
+	}
+	
+	@Disabled
+	@Test
+	public void insertOutcomeToUseItem() {
+		OutcomeQRItemDTO dto = new OutcomeQRItemDTO();
+		dto.setOutcome_code(202000000001L);
+		dto.setBranch_id("bid001");
+		int result = mapper.insertOutcomeToUseItem(dto);
+		log.info("result : "+ result);
+	}
+	
+	
+
+	@Disabled
+	@Test
+	public void selectOutcomeListForFindOutcomeId() {
+		int outcome_id = mapper.selectOutcomeListForFindOutcomeId();
+		log.info("outcome_id : "+ outcome_id);
+	}
+	
+	@Disabled
+	@Test
+	public void insertOutcomeListToUseItem() {
+		OutcomeQRItemDTO dto = new OutcomeQRItemDTO();
+		dto.setOutcome_id( 40 );
+		dto.setItem_id(5910);
+		int result = mapper.insertOutcomeListToUseItem(dto);
+		log.info("result : "+ result);
+	}
+	
+	@Disabled
+		@Test
+	public void selectDiscardIdForFindDiscardCode() {
+		long discard_code = mapper.selectDiscardIdForFindDiscardCode();
+		log.info("discard_code : "+ discard_code);
+	}
+	
+	@Test
+	public void insertDiscardToUseItem() {
+		OutcomeQRItemDTO dto = new OutcomeQRItemDTO();
+		dto.setDiscard_code(202312000001L);
+		dto.setBranch_id("bid001");
+		int result = mapper.insertDiscardToUseItem(dto);
+		log.info("result : "+ result);
+	}
+	
 	
 	
 
