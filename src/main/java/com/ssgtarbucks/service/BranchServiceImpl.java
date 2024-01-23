@@ -93,6 +93,11 @@ public class BranchServiceImpl implements BranchService {
 	public List<StockLocationDTO> selectLocaitonToShow(String branch_id) {
 		return branchRepository.selectLocaitonToShow(branch_id);
 	}
+
+	@Override
+	public int deleteLocation(StockLocationDTO dto) {
+		return branchRepository.deleteLocation(dto);
+	}
 	
 
 
