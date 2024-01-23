@@ -19,7 +19,7 @@ public interface StockService {
 	
 	public void updateSaleTransaction(String branch_id, List<SaleDTO> saleList);
 
-	int updateStockByItemIdToMove(MoveItemDTO moveItemDTO);
+	int updateStockByItemIdToMove(MoveItemDTO moveItemDTOList);
 	
 	public List<IncomeDTO> selectInspectionListByBranchId(String branch_id);
 	

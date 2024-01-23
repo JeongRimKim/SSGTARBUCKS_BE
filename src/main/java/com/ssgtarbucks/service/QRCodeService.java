@@ -6,6 +6,8 @@ import java.util.Map;
 
 
 import com.google.zxing.WriterException;
+import com.ssgtarbucks.domain.MoveQRItemDTO;
+import com.ssgtarbucks.domain.OutcomeQRItemDTO;
 import com.ssgtarbucks.domain.ProductDTO;
 import com.ssgtarbucks.domain.QRCodeDTO;
 import com.ssgtarbucks.domain.SearchDTO;
@@ -22,5 +24,9 @@ public interface QRCodeService {
 
 	List<SearchDTO> selectItemAndLocationToSearchbyQRcode(QRCodeDTO qrcode_dto);
 
+	public int updateMoveItemByQR(MoveQRItemDTO dto);
 
+	int outcomeItemsByQR(OutcomeQRItemDTO dto);
+
+	int discardItemsByQR(OutcomeQRItemDTO dto);
 }

@@ -1,6 +1,5 @@
 package com.ssgtarbucks.domain;
 
-import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
@@ -13,17 +12,16 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Alias("MoveItemDTO")
-public class MoveItemDTO {
+@Alias("OutcomeQRItemDTO")
+public class OutcomeQRItemDTO {
 	String branch_id;
-	String location_code;
+	String qrcode_value;
 	int location_id;
-	List<Integer> item_list;
-	String location_area;
-	String location_alias;
-	String location_section;
-    public List<Integer> getList() {
-        return item_list;
-    }
-
+	int item_id;
+	////////////////////////////////////////
+	Long outcome_code;
+	int outcome_id;
+	/////////////////////////////////////
+	Long discard_code;
+	int discard_id;
 }

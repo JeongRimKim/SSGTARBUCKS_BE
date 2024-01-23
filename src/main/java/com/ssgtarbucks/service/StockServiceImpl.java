@@ -67,11 +67,14 @@ public class StockServiceImpl implements StockService {
 		//location_id 조회
 		int location_id = stockRepository.selectLocationToFindLocationId(moveItemDTO);
 		System.out.println("location_id : " + location_id);
+		moveItemDTO.setLocation_id(location_id);
 		//장소이동
+		System.out.println("moveItemDTO 출력 >>> " + moveItemDTO);
 		int result = stockRepository.updateStockByItemIdToMove(moveItemDTO);
 		System.out.println("장소이동 갯수 : "+ result);
 		return result;
-	}
+	};
+
 
 
 	@Override
