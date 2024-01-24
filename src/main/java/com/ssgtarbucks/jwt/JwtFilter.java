@@ -35,7 +35,6 @@ public class JwtFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		 System.out.println("1. JwtFilter.doFilterInternal>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
 		String jwtToken = "";
 
 		Enumeration<String> names = request.getHeaderNames(); // header subject

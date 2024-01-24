@@ -19,26 +19,15 @@ import com.ssgtarbucks.domain.TokenDTO;
 import com.ssgtarbucks.domain.UserDTO;
 import com.ssgtarbucks.jwt.JwtUtil;
 import com.ssgtarbucks.service.UserService;
+import com.ssgtarbucks.util.SendMessage;
 
-import net.nurigo.sdk.NurigoApp;
-import net.nurigo.sdk.message.model.Message;
-import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
-import net.nurigo.sdk.message.response.SingleMessageSentResponse;
-import net.nurigo.sdk.message.service.DefaultMessageService;
 
 
 @RestController
 @RequestMapping("/api/v1")
 public class UserController {
-	
-    final DefaultMessageService messageService;
 
-    public UserController() {
-        this.messageService = NurigoApp.INSTANCE.initialize("NCSBIKQJI5XRR46N", "Z8MREVCZEFS2BMVFLDOOOHYD0GDJGZHT", "https://api.coolsms.co.kr");
 
-    }
-    
-    
 	@Autowired
 	AuthenticationManagerBuilder authenticationManagerBuilder;
 	
@@ -51,6 +40,8 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private SendMessage sendMessage;
 
 	@PostMapping("/user/login")
 	public ResponseEntity<TokenDTO> login(@RequestBody UserDTO userDTO) {
@@ -83,9 +74,6 @@ public class UserController {
 	@PostMapping("/user/find")
     public ResponseEntity<UserDTO> find(@RequestBody UserDTO userDTO) { //비밀번호찾기
 		System.out.println("UserController - /user/find(POST) >>> userDTO : " + userDTO);
-        Message message = new Message();
-        message.setFrom("01084037635");
-        message.setTo(userDTO.getUser_phone());
 
 		if(userDTO.getAuth_code()==null) {
 			System.out.println("리액트에서 보낸 인증코드:"+userDTO.getAuth_code());
@@ -100,17 +88,25 @@ public class UserController {
 			//일치하는 사원있음
 			if(count>0) {
 				userService.deleteTempCodeByUserId(userDTO.getUser_id());
-				System.out.println("문자인증보냄");
-				String tempPw = userService.generateTempPw();
-				System.out.println(tempPw);
-		        message.setText("[SSGtarbucks]비밀번호 찾기 인증번호 => ["+tempPw+"]");
-		        userService.insertTempCode(tempPw, userDTO.getUser_id());
-		        SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
-
+				System.out.println("인증보냄");
+				String tempCode = userService.generateTempPw();
+				System.out.println(tempCode);
+		        userService.insertTempCode(tempCode, userDTO.getUser_id());
+		        
+			    //메일인증
+		        userService.Mail(userDTO.getUser_email(), tempCode);
+		        
+		        //문자인증
+		        //userService.Message(userDTO.getUser_phone(), tempCode);
+		        //userService.MessageCompnt(userDTO.getUser_phone(), tempCode);
+			
+			}else{
+				userDTO = null;
 			}
+
 		}
 		
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(userDTO);
     }
 	
 	@PostMapping("/user/verify")
@@ -119,8 +115,9 @@ public class UserController {
 		System.out.println("UserController - /user/varify(POST) >>> userDTO : " + userDTO);
 		
 		String savedTempCode = userService.selectTempCodeByUserId(userDTO.getUser_id());
-		
+		System.out.println(savedTempCode);
 		if(savedTempCode.equals(userDTO.getAuth_code())) {
+			System.out.println("성공했습니다.");
 			returnValue = "성공";
 			userDTO.setUser_pw(new BCryptPasswordEncoder().encode(userDTO.getUser_id()));
 			int result = userService.updateUserByUserIdToChgPW(userDTO);
