@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class SendMail extends Authenticator {
 	public PasswordAuthentication getPasswordAuthentication() {
 		
-		System.out.println("PasswordAuthentication");
+		System.out.println("PasswordAuthentication"); 
 
 		return new PasswordAuthentication("", "");
 	}
