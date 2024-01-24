@@ -21,4 +21,5 @@ public class UserDTO {
 	private String branch_id;
 	private String branch_name;
 	private String branch_address;
+	private String auth_code;
 }

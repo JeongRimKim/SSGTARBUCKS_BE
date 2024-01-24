@@ -14,4 +14,14 @@ public interface UserRepository {
 
 	UserDTO selectUserAndBranchToInfo(String string);
 	
+	int selectCountToFindUserExist(UserDTO userDTO);
+	
+	int updateUserByUserIdToChgPW(UserDTO userDTO);
+	
+	int insertTempCode(String temp_pw_code, String user_id);
+	
+	String selectTempCodeByUserId(String user_id);
+	
+	int deleteTempCodeByUserId(String user_id);
+	
 }
