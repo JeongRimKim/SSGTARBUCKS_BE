@@ -17,13 +17,14 @@ import org.springframework.security.web.savedrequest.CookieRequestCache;
 import org.springframework.web.filter.CorsFilter;
 
 import com.ssgtarbucks.jwt.JwtFilter;
+import com.ssgtarbucks.util.SendMessage;
 
 @Configuration
 public class SecurityConfig {
 
 	@Autowired
 	private JwtFilter jwtFilter;
-
+	
 	// jwt 를 쿠키로 저장할때 쿠키의 이름
 	@Value("${jwt.name}")
 	private String jwtName;
@@ -39,12 +40,16 @@ public class SecurityConfig {
 				.permitAll()
 				//.antMatchers("/api/v1/admin/**").hasRole("ADMIN") // 관리자만 가능
 				//.antMatchers("/api/v1/**").hasRole("MANAGER") // 이외 점주
-				.anyRequest().authenticated();
+				.anyRequest().authenticated()
+				//.and()
+				//.csrf().ignoringAntMatchers("/api/v1/find")
+				;
 
 		// 세션을 사용하지 않도록 설정한다.
 		http.sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				// 토큰을 검사하는 필터를 UsernamePasswordAuthenticationFilter 가 동작하기 이전에 동작하도록 설정 한다.
 				.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+				
 				// 세션을 사용할수 없기때문에 쿠키케시를 사용하도록 설정한다.
 				.requestCache(config -> config.requestCache(cookCache));
 
