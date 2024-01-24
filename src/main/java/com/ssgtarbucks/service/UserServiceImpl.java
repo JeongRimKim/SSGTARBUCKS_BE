@@ -179,7 +179,7 @@ public class UserServiceImpl implements UserService {
 	   
 
 
-	     Authenticator auth = new SendMail();
+	     Authenticator auth = sendMail;
 	     Session mailSession = Session.getDefaultInstance(props,auth);
 	   
 	     Message msg = new MimeMessage(mailSession);
