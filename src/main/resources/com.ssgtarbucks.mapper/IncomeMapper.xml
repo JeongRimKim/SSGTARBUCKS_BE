@@ -19,7 +19,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    il.income_list_quantity,
 		    il.income_list_result,
 		    il.item_id,
-		    
 		    item.item_exp,
 		    p.product_name
 		from income i
@@ -27,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		join item item on item.item_id = il.item_id
 		join product p on item.product_id = p.product_id
 		where i.branch_id =#{branch_id}
+		order by income_id desc
 	</select>
 	
 	<!-- 입고내역 조회 - 상세입고내역 조회 -->
