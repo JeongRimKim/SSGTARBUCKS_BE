@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    il.income_list_result,
 		    il.item_id,
 		    item.item_exp,
-		    p.product_name
+		    p.product_name, p.product_standard, p.product_unit
 		from income i
 		join income_list il on il.income_id = i.income_id
 		join item item on item.item_id = il.item_id
