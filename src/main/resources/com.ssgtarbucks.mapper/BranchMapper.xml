@@ -141,7 +141,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    c.category_name, 
 		    p.product_spec;
 	</select>
-	
+	<!-- 발주추천 변경 -->
 	<select id="joinProductFortotalProductQuantity" parameterType="string" resultType="ProductDTO">
 		<![CDATA[
 		SELECT 
