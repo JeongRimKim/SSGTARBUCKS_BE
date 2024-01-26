@@ -123,6 +123,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT 
 		    p.product_code, p.product_name,  p.product_standard, 
 		    p.product_unit, c.category_name,  p.product_spec,
+		    c.category_name,
 		    SUM(s.stock_quantity) AS total_stock_quantity,
 		    MAX(i.item_exp) AS latest_item_exp
 		FROM product p 
@@ -144,7 +145,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="joinProductFortotalProductQuantity" parameterType="string" resultType="ProductDTO">
 		<![CDATA[
 		SELECT 
-		    p.product_code, p.product_name, p.product_standard, p.product_unit, SUM(il.income_list_quantity+s.stock_quantity) AS total_product_quantity
+		    p.product_code, p.product_name, p.product_standard, p.product_unit,  c.category_name,  SUM(il.income_list_quantity+s.stock_quantity) AS total_product_quantity
 		FROM income ic
 		JOIN income_list il ON il.income_id = ic.income_id
 		JOIN item i ON i.item_id = il.item_id
@@ -157,7 +158,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			p.product_code,
 			p.product_name, 
 		    p.product_standard, 
-		    p.product_unit
+		    p.product_unit,
+		    c.category_name
 		HAVING 
 		    total_product_quantity <= 5
 		Order By  total_product_quantity;
