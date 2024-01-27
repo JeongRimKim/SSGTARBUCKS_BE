@@ -129,7 +129,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    il.income_list_quantity,
 		    il.income_list_result,
 		    il.item_id,
-		    
 		    item.item_exp,
 		    p.product_name,
 		    p.product_standard,
