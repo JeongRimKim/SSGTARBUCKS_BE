@@ -33,6 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		left JOIN item i  ON s.item_id = i.item_id
         left join product p on p.product_id = i.product_id
 		where  sl.branch_id= #{branch_id}
+			and p.product_id IS NOT NULL
 		order by sl.location_id
 	</select>
 	
