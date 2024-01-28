@@ -29,6 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAllUserAndBranchInfo" resultType="UserDTO">
 		select * from user u
 		join branch b on b.branch_id = u.branch_id
+		where u.user_type !=  "admin"
 	</select>
 	
 	<!-- 직원아이디로 직원조회 -->
