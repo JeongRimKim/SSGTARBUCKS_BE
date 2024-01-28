@@ -25,6 +25,10 @@ public class TotalDTO {
 	String product_spec;
 	String category_id;
 	String image_id;
+	String item_code;
+	String image_path;
+	String item_qrcode_value;
+	String item_qrcode_path;
 	
 	String category_name;
 	
@@ -40,7 +44,11 @@ public class TotalDTO {
 	String location_section;
 	String location_section_name;
 	String location_alias;
+	String location_qrcode_value;
+	String location_qrcode_path;
 	
+	int stock_id;
+	Date stock_date;
 	int stock_quantity;
 	String branch_id;
 	String searchWord;
