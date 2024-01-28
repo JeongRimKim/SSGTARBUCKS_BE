@@ -42,6 +42,8 @@ public class TotalDTO {
 	String location_alias;
 	
 	int stock_quantity;
+	String branch_id;
+	String searchWord;
 }
 /*
 SELECT 

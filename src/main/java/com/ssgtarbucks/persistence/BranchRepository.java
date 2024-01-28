@@ -12,7 +12,7 @@ import com.ssgtarbucks.domain.UserDTO;
 
 @Mapper
 public interface BranchRepository {
-	public List<TotalDTO> selectSearchBySearchWord(String searchWord);
+	public List<TotalDTO> selectSearchBySearchWord(TotalDTO totalDTO);
 	public List<TotalDTO> selectExpirationDateList(String branch_id, String curDate);
 	public UserDTO selectUserAndBranchInfo(String branch_id);
 	public int selectLocationSectionTofindMaxValue(StockLocationDTO dto);

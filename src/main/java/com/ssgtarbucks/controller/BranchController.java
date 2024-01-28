@@ -72,8 +72,10 @@ public class BranchController {
 	@ResponseBody
 	public ResponseEntity<List<TotalDTO>> search(@RequestParam String branch_id, String searchWord) {
 		System.out.println("BranchController - /integrate/search(GET) >>>" + branch_id + "/" + searchWord);
-
-		List<TotalDTO> totalList = branchService.selectSearchBySearchWord(searchWord);
+		TotalDTO dto =new TotalDTO();
+		dto.setBranch_id(branch_id);
+		dto.setSearchWord(searchWord);
+		List<TotalDTO> totalList = branchService.selectSearchBySearchWord(dto);
 
 		return ResponseEntity.ok(totalList);
 	}

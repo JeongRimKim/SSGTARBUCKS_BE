@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.ssgtarbucks.persistence.BranchRepository">
 	
 	<!-- 통합검색  -->
-	<select id="selectSearchBySearchWord" parameterType="string" resultType="ToTalDTO">
+	<select id="selectSearchBySearchWord" parameterType="ToTalDTO" resultType="ToTalDTO">
 		SELECT 
 		    p.product_id,		
 		    p.product_code,

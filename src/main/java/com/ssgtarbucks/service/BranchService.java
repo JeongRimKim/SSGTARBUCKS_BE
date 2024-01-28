@@ -9,7 +9,7 @@ import com.ssgtarbucks.domain.UserDTO;
 import com.ssgtarbucks.domain.ProductDTO;
 
 public interface BranchService {
-	public List<TotalDTO> selectSearchBySearchWord(String searchWord);
+	public List<TotalDTO> selectSearchBySearchWord(TotalDTO totalDTO);
 	public List<TotalDTO> selectExpirationDateList(String branch_id, String curDate);
 	public UserDTO selectUserAndBranchInfo(String branch_id);
 	public void registerStockLocatioinWithTrans(List<StockLocationDTO> locationDTOList);
