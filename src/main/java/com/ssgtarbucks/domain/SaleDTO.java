@@ -23,6 +23,9 @@ public class SaleDTO {
 	String sale_status;
 	int item_id;
 	String product_name;
+	String product_unit;
+	String product_spec;
+	String product_standard;
 	int sale_list_quantity;
 }
 
