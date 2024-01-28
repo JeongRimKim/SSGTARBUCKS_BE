@@ -21,8 +21,8 @@ public class BranchServiceImpl implements BranchService {
 	private BranchRepository branchRepository;
 
 	@Override
-	public List<TotalDTO> selectSearchBySearchWord(String searchWord) {
-		return branchRepository.selectSearchBySearchWord(searchWord);
+	public List<TotalDTO> selectSearchBySearchWord(TotalDTO totalDTO) {
+		return branchRepository.selectSearchBySearchWord(totalDTO);
 	}
 
 	@Override
