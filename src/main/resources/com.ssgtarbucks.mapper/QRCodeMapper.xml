@@ -24,9 +24,10 @@
 	<!-- QR코드 통합검색  --> 
 	<select id="selectItemAndLocationToSearchbyQRcode" parameterType="QrCodeDTO" resultType="SearchDTO">
 		SELECT 
-		    p.product_id,   p.product_name,  p.product_standard, 
+		    p.product_id,  p.product_code,
+		   p.product_name,  p.product_standard, 
 		    p.product_unit,  c.category_name,  p.product_spec,
-			i.item_id,i.item_code,i.item_exp, img.image_path, 
+			i.item_id,i.item_code,i.item_exp, i.item_status, img.image_path, 
 		    qr.qrcode_value as item_qrcode_value ,qr.qrcode_path as item_qrcode_path,
 			s.stock_quantity,  s.stock_date, sl.location_code, 
 		    sl.location_area, sl.location_section,sl.location_section_name, sl.location_alias,
