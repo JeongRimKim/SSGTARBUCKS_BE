@@ -51,6 +51,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    s.sale_status,
 		    sl.item_id,
 		    p.product_name,
+		    p.product_unit,
+			p.product_spec,
+			p.product_standard,
 		    sl.sale_list_quantity
 		from sale s
 		join sale_list sl on sl.sale_id = s.sale_id
