@@ -39,7 +39,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN stock s ON s.item_id = i.item_id
 		JOIN stock_location sl ON sl.location_id = s.location_id
 		JOIN category c on c.category_id = p.category_id
-		where s.branch_id=#{branch_id} and (p.product_code like concat('%',#{searchWord},'%') or p.product_name like concat('%',#{searchWord},'%')
+		where s.branch_id=#{branch_id} 	and s.stock_quantity != 0
+										and (p.product_code like concat('%',#{searchWord},'%') or p.product_name like concat('%',#{searchWord},'%')
 										or p.product_standard like concat('%',#{searchWord},'%') or p.product_spec like concat('%',#{searchWord},'%')
 										or c.category_name like  concat('%',#{searchWord},'%') or i.item_exp like concat('%',#{searchWord},'%') 
 		                                or sl.location_area like concat('%',#{searchWord},'%') or sl.location_code like concat('%',#{searchWord},'%')

@@ -17,7 +17,7 @@
 			join stock s on s.item_id =	i.item_id
 			join stock_location sl on sl.location_id = s.location_id
 			join qrcode q on q.qrcode_id = i.qrcode_id
-		WHERE q.qrcode_id = #{qrcode_id}
+		WHERE q.qrcode_id = #{qrcode_id} and s.stock_quantity != 0
 	</select>
 	
 	
@@ -41,6 +41,8 @@
 		JOIN stock_location sl on s.location_id=sl.location_id
 		JOIN qrcode qrp ON qrp.qrcode_id=sl.qrcode_id
 		WHERE 
+			s.stock_quantity != 0
+			and
 		    (s.branch_id = #{branch_id} and qr.qrcode_value=#{qrcode_value})
 		    or
 		    (s.branch_id = #{branch_id} and qrp.qrcode_value=#{qrcode_value})
