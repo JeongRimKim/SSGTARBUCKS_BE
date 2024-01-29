@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 										or c.category_name like  concat('%',#{searchWord},'%') or i.item_exp like concat('%',#{searchWord},'%') 
 		                                or sl.location_area like concat('%',#{searchWord},'%') or sl.location_code like concat('%',#{searchWord},'%')
 		                                or sl.location_section_name like concat('%',#{searchWord},'%') or sl.location_alias like concat('%',#{searchWord},'%')
-		                                or sl.location_alias like concat('%',#{searchWord},'%'))
+		                                or sl.location_alias like concat('%',#{searchWord},'%') or i.item_code like concat('%',#{searchWord},'%'))
 		order by item_exp
 	</select>
 	

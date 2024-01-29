@@ -29,6 +29,7 @@ public class IncomeDTO {
 	int item_id;
 	String item_code;
 	Date item_exp;
+	String item_status;
 	String product_name;
 	String product_standard;
 	String product_unit;

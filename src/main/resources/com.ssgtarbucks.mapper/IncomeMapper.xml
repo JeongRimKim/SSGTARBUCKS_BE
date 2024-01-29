@@ -20,6 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    il.income_list_result,
 		    il.item_id,
 		    item.item_exp,
+		    item.item_code,
 		    p.product_name, p.product_standard, p.product_unit
 		from income i
 		join income_list il on il.income_id = i.income_id
@@ -71,12 +72,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 상품검수 - 상품번호가 같은 상품 조회 -->
-	<select id="selectSameProductCount" resultType="int">
+	<select id="selectSameProductCount" resultType="int" parameterType="int">
 		select count(*)
 			from stock s
-			join item i on i.item_id = s.item_id
-			join product p on p.product_id = i.product_id
-			where p.product_code = #{item_code}
+			where s.item_id = #{item_code}
 	</select>
 	
 	<!-- 재고목록추가 -->
@@ -91,11 +90,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 입고상태 변경 -->
 	<update id="updateIncomeStatus" parameterType="string">
-		update income set income_status = "입고전" where income_id = #{income_id}
+		update income set income_status = #{income_status} where income_id = #{income_id}
 	</update>
 	
 	<!-- 상품상태변경 -->
 	<update id="updateItemStatus" >	
-		update item set item_status = #{item_status} where item_id = #{item_id}
+		update item set item_status = "재고" where item_id = #{item_id}
 	</update>
 </mapper>
