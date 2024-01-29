@@ -106,18 +106,25 @@ public class StockController {
 
 	// QR코드
 	@GetMapping("/checked/insert/location/qr")
-	public ResponseEntity<List<IncomeDTO>> insertLocationQR(@RequestParam String scanResult,
+	public String insertLocationQR(@RequestParam String scanResult,
 			@RequestParam int item_id) {
 		System.out.println("branch_id>>>>>>>>>>>>" + scanResult + "|" + item_id);
 
 		StockLocationDTO stockLocationDTO = stockService.selectStockLocationByLocationCode(scanResult);
-
 		StockDTO stockDTO = stockService.selectStockByItemId(item_id);
 
 		int result1 = stockService.updateStockLocation(stockLocationDTO.getLocation_id(), item_id);
-		System.out.println(stockLocationDTO);
+		System.out.println(stockDTO);
 
-		return ResponseEntity.ok(null);
+		String resultValue = stockDTO.getProduct_name()+"("+stockDTO.getItem_id()+")"+"보관장소 등록 완료되었습니다.";
+		
+		System.out.println(result1);
+
+		
+		if (result1 == 0) {
+			resultValue = stockDTO.getProduct_name()+"("+stockDTO.getItem_id()+")"+"보관장소 등록 실패했습니다.";
+		}
+		return resultValue;
 	}
 
 	// 수기

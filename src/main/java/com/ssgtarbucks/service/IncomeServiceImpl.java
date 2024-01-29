@@ -42,7 +42,7 @@ public class IncomeServiceImpl implements IncomeService {
 	}
 
 	@Override
-	public int selectSameProductCount(String item_code) {
+	public int selectSameProductCount(int item_code) {
 		return incomeRepository.selectSameProductCount(item_code);
 	}
 
@@ -57,8 +57,8 @@ public class IncomeServiceImpl implements IncomeService {
 	}
 
 	@Override
-	public int updateIncomeStatus(String income_id) {
-		return incomeRepository.updateIncomeStatus(income_id);
+	public int updateIncomeStatus(String income_status, String income_id) {
+		return incomeRepository.updateIncomeStatus(income_status,income_id);
 	}
 
 	@Override

@@ -16,9 +16,9 @@ public interface IncomeRepository {
 	public ItemDTO selectItemAllByItemCode(String item_code);
 	public int updateIncomeListResult(int item_id);
 	public int selectSameItemCount(String item_code, Date item_exp);
-	public int selectSameProductCount(String item_code);
+	public int selectSameProductCount(int item_code);
 	public int insertStockItem(String branch_id, int item_id);
 	public int updateStockQuantity(int item_id);
-	public int updateIncomeStatus(String income_id);
+	public int updateIncomeStatus(String income_status, String income_id);
 	public int updateItemStatus(int item_id, String item_status);
 }
