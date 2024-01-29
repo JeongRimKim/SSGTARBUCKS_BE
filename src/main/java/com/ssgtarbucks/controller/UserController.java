@@ -90,7 +90,7 @@ public class UserController {
 				userService.deleteTempCodeByUserId(userDTO.getUser_id());
 				System.out.println("인증보냄");
 				String tempCode = userService.generateTempPw();
-				System.out.println(tempCode);
+				System.out.println("인증코드 : " + tempCode);
 		        userService.insertTempCode(tempCode, userDTO.getUser_id());
 		        
 			    //메일인증
