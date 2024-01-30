@@ -21,7 +21,7 @@ import com.ssgtarbucks.service.IncomeService;
 import net.bytebuddy.agent.builder.AgentBuilder.InitializationStrategy.SelfInjection.Split;
 
 @RestController
-@RequestMapping("/ssgtarbucks_BE/api/v1/income")
+@RequestMapping("/api/v1/income")
 @CrossOrigin("*")
 
 public class IncomeController {

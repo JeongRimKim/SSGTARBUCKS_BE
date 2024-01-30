@@ -15,7 +15,7 @@ import com.ssgtarbucks.domain.ProductDTO;
 import com.ssgtarbucks.service.ProductService;
 
 @RestController
-@RequestMapping("/ssgtarbucks_BE/api/v1/product")
+@RequestMapping("/api/v1/product")
 @CrossOrigin("*")
 
 public class ProductController {

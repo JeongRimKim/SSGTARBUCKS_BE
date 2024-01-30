@@ -31,7 +31,7 @@ import io.swagger.models.Model;
 
 
 @RestController
-@RequestMapping("/ssgtarbucks_BE/api/v1/admin")
+@RequestMapping("/api/v1/admin")
 @CrossOrigin("*")
 public class AdminController {
 

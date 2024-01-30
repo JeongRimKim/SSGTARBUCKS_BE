@@ -25,7 +25,7 @@ import com.ssgtarbucks.util.SendMessage;
 
 
 @RestController
-@RequestMapping("/ssgtarbucks_BE/api/v1")
+@RequestMapping("/api/v1")
 @CrossOrigin("*")
 
 public class UserController {

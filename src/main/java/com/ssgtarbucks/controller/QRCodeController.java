@@ -50,7 +50,7 @@ import com.ssgtarbucks.service.QRCodeService;
 import com.ssgtarbucks.service.UserService;
 
 @RestController
-@RequestMapping("/ssgtarbucks_BE/api/v1/qrcode")
+@RequestMapping("/api/v1/qrcode")
 @CrossOrigin("*")
 
 public class QRCodeController {

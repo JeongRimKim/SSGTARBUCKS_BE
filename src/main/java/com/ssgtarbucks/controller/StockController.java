@@ -37,7 +37,7 @@ import com.ssgtarbucks.service.StockService;
 import org.springframework.core.io.Resource; 
 
 @RestController
-@RequestMapping("/ssgtarbucks_BE/api/v1/stock")
+@RequestMapping("/api/v1/stock")
 @CrossOrigin("*")
 
 public class StockController {

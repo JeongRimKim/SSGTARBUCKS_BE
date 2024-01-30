@@ -33,7 +33,7 @@ import com.ssgtarbucks.service.BranchService;
 
 
 @Controller
-@RequestMapping("/ssgtarbucks_BE/api/v1/branch")
+@RequestMapping("/api/v1/branch")
 @CrossOrigin("*")
 public class BranchController {
 
