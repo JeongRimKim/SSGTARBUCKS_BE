@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +33,8 @@ import com.ssgtarbucks.service.BranchService;
 
 
 @Controller
-@RequestMapping("/api/v1/branch")
+@RequestMapping("/ssgtarbucks_BE/api/v1/branch")
+@CrossOrigin("*")
 public class BranchController {
 
 	@Autowired
