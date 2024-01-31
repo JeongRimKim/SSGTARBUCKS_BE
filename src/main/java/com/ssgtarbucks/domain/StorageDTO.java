@@ -11,6 +11,7 @@ public class StorageDTO {
 	int item_id;
 	String item_code;
 	Date item_exp;
+	String item_status;
 	
 	int product_id;
 	String product_name;
@@ -18,7 +19,10 @@ public class StorageDTO {
 	String product_unit;
 	String product_spec;
 	String category_id;
-	String img_path;
+	String category_name;
+	String image_path;
+	int image_id;
+	String image_name;
 	
 
 	int stock_id;

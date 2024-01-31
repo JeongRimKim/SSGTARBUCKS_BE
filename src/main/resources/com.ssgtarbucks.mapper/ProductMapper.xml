@@ -9,21 +9,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 지점별 상품목록 조회 -->
 	<select id="selectProductListByBranchId" parameterType="string" resultType="ProductDTO">
-		select distinct
-			p.product_code,
-			p.product_name,
-		    p.product_standard,
+		SELECT 
+		    p.product_id, p.product_code, p.product_name,  p.product_standard, 
+		    p.product_unit, p.product_spec, c.category_name, 
+		    SUM(s.stock_quantity) AS total_product_quantity
+		FROM product p 
+			JOIN item i ON p.product_id = i.product_id
+			JOIN stock s ON s.item_id = i.item_id
+			JOIN category c ON c.category_id = p.category_id
+         
+		WHERE 
+		    s.branch_id = #{branch_id}
+		GROUP BY 
+			p.product_id,
+		    p.product_code, 
+		    p.product_name, 
+		    p.product_standard, 
 		    p.product_unit,
-		    c.category_name,
-		    p.product_spec,
-		    s.stock_quantity
-		from product p 	
-        join item i on p.product_id = i.product_id
-        join stock s on s.item_id = i.item_id
-		join category c on c.category_id = p.category_id
-		where s.branch_id = #{branch_id}
-		order by p.product_name
-        ;
+		    c.category_name, 
+		    p.product_spec
 	</select>
 	
 </mapper>
