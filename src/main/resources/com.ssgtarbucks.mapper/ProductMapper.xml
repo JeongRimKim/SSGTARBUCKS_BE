@@ -30,16 +30,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    p.product_spec
 	</select>
 	
-	<select id="selectProductDetailByBranchId" parameterType="StorageDTO" resultType="StorageDTO">
-		SELECT 
-		    p.product_code, p.product_name,  p.product_standard, 
-		    p]N p.image_id=img.image_id
-			JOIN qrcode qr ON i.qrcode_id=qr.qrcode_id
-            JOIN stock_location sl ON s.location_id = sl.location_id
-		WHERE 
-		    s.branch_id = #{branch_id} and
-            p.product_id=#{product_id}
-	</select>
-	
-	
 </mapper>
