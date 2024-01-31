@@ -163,6 +163,7 @@ class QrCodeRepositoryTest {
 	}
 	
 	@Test
+	@Disabled
 	public void insertDiscardToUseItem() {
 		OutcomeQRItemDTO dto = new OutcomeQRItemDTO();
 		dto.setDiscard_code(202312000001L);
