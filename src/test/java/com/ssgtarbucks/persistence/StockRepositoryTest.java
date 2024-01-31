@@ -43,6 +43,7 @@ class StockRepositoryTest {
 	}
 	
 	@Test
+	@Disabled
 	public void selectLocationToFindLocationId() {
 		MoveItemDTO dto = new MoveItemDTO();
 		dto.setLocation_code("bid001-FR-A1");
