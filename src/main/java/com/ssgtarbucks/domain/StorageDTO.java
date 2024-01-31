@@ -21,7 +21,7 @@ public class StorageDTO {
 	String category_id;
 	String category_name;
 	String image_path;
-	int image_id;
+	String image_id;
 	String image_name;
 	
 

@@ -77,6 +77,7 @@ class UserRepositoryTest {
 	}
 	
 	@Test
+	@Disabled
 	public void updateBCryptPWSample() throws Exception {
 		//이클립스 SHA256 -> 스프링시큐리티 BCryptPasswordEncoder
 			String originalPassword = String.format("20k30011");

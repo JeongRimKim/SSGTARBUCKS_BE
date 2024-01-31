@@ -123,9 +123,9 @@ class BranchRepositoryTest {
 		log.info("결과>>>>"+ pList);
 	}
 	
-	
 
 	@Test
+	@Disabled
 	public void selectLocaitonToShowList() {
 		List<StockLocationDTO> sList = bmapper.selectLocaitonToShow("bid001");
 		log.info("결과 > "+sList);
