@@ -14,6 +14,6 @@ public class SendMail extends Authenticator {
 		      
 		System.out.println("PasswordAuthentication"); 
 
-		return new PasswordAuthentication("", "");
+		return new PasswordAuthentication("jungyun5535@naver.com", "3QSG5QGXL22F");
 	}
 }

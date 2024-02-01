@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +25,6 @@ import com.ssgtarbucks.util.SendMessage;
 
 @RestController
 @RequestMapping("/api/v1")
-@CrossOrigin("*")
-
 public class UserController {
 
 
@@ -123,10 +120,33 @@ public class UserController {
 			System.out.println("성공했습니다.");
 			returnValue = "성공";
 			userDTO.setUser_pw(new BCryptPasswordEncoder().encode(userDTO.getUser_id()));
+			
 			int result = userService.updateUserByUserIdToChgPW(userDTO);
+			
 			userService.deleteTempCodeByUserId(userDTO.getUser_id());
 		}
 		
 		return ResponseEntity.ok(returnValue);
+    }
+	
+	@PostMapping("/user/modify")
+    public ResponseEntity<String> modify(@RequestBody UserDTO userDTO) {
+		System.out.println("UserController - /user/modify(POST) >>> userDTO : " + userDTO);
+		
+		String newPw  = new BCryptPasswordEncoder().encode(userDTO.getUser_id());
+		System.out.println(newPw+"~~"+userDTO.getUser_pw());
+
+		
+		userDTO.setUser_pw(newPw);
+
+		
+		int result = userService.updateUserByUserIdToChgPW(userDTO);
+		if(result == 1) {
+			System.out.println("변경성공");
+		} else {
+			System.out.println("변경실패");
+		} 
+		
+		return ResponseEntity.ok(null);
     }
 }
