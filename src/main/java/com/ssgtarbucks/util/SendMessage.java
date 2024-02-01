@@ -36,7 +36,7 @@ public class SendMessage {
         net.nurigo.sdk.message.model.Message message = new net.nurigo.sdk.message.model.Message();
         message.setFrom("01084037635");
         message.setTo(to);
-        message.setText("[SSGtarbucks]비밀번호 찾기 인증번호 => ["+tempCode+"]");
+        message.setText("[SSGtarbucks] 비밀번호 찾기 인증번호 => ["+tempCode+"]");
 
         SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
     
