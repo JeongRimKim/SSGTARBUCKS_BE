@@ -147,7 +147,7 @@ public class UserServiceImpl implements UserService {
     
    //메일전송
     public void Mail(String to, String tempCode) {
-    	
+
 		String host = "smtp.naver.com";
 	    String subject = "[SSGTARBUCKS] 비밀번호 인증코드 발송";  //메일제목
 	    String from = "jungyun5535@naver.com"; //보내는 메일주소 ////////////수정필요
@@ -184,11 +184,11 @@ public class UserServiceImpl implements UserService {
 	     props.put("mail.smtp.socketFactory.port", "465");
 	     props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 	     props.put("mail.smtp.socketFactory.fallback", "false");
-	   
 
 	     Authenticator auth = sendMail;
 	     Session mailSession = Session.getDefaultInstance(props,auth);
-	   
+	     Transport transport = mailSession.getTransport("smtp");
+
 	     Message msg = new MimeMessage(mailSession);
 	     msg.setFrom(new InternetAddress(from, MimeUtility.encodeText(fromName,"UTF-8","B"))); //보내는 사람 설정
 	     InternetAddress[] address = {new InternetAddress(to)};
@@ -202,6 +202,7 @@ public class UserServiceImpl implements UserService {
 	     Transport.send(msg); //메일 보내기
 
 	     System.out.println("메일 발송을 완료하였습니다.");
+	     transport.close();
 	     }catch(MessagingException ex){
 	      System.out.println("mail send error : "+ex.getMessage());
 	       ex.printStackTrace();

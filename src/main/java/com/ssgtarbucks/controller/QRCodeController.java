@@ -18,8 +18,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import io.swagger.models.Model;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,8 +49,6 @@ import com.ssgtarbucks.service.UserService;
 
 @RestController
 @RequestMapping("/api/v1/qrcode")
-@CrossOrigin("*")
-
 public class QRCodeController {
 
 	@Autowired

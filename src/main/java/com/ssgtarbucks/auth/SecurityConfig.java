@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.savedrequest.CookieRequestCache;
-import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.filter.CorsFilter;
 
 import com.ssgtarbucks.jwt.JwtFilter;
@@ -36,9 +35,7 @@ public class SecurityConfig {
 		System.out.println("SecurityConfig.filterChain");
 		// 권한에 따라 허용하는 url 설정
 		http.csrf().disable().addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
-				.authorizeRequests()
-	            .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-				.antMatchers("/ssgtarbucks_BE/api/v1/**", // 모두허용
+				.authorizeRequests().antMatchers("/api/v1/**", // 모두허용
 						"/swagger-resources/**", "/swagger-ui.html", "/v2/api-docs", "/webjars/**") // swagger 툴
 				.permitAll()
 				//.antMatchers("/api/v1/admin/**").hasRole("ADMIN") // 관리자만 가능
