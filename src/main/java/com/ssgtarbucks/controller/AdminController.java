@@ -104,7 +104,7 @@ public class AdminController {
 	@GetMapping("/branch/user/modify/list")
     public ResponseEntity<List<UserDTO>> branchIsNullUser() { 
 		System.out.println("BranchController - /branch/user/modify/list(GET) >>>");
-		
+		//매장연결정보가 없는 직원들 목록 조회
 		List<UserDTO> userList = adminService.selectUserWithBranchIsNull();
 		
 		return ResponseEntity.ok(userList);
@@ -112,10 +112,10 @@ public class AdminController {
 	
 	@PutMapping("/branch/user/modify")
     public String modifyUser(@RequestBody UserDTO selectedData, @RequestParam String initialUserId) { 
-		System.out.println("BranchController - /branch/user/modify(PUT) >>>");
-		System.out.println(selectedData);
+		System.out.println("++BranchController - /branch/user/modify(PUT) >>>"+selectedData+"/"+initialUserId);
+
 		adminService.updateUserTransaction(selectedData,initialUserId);
-		//System.out.println(adminService.updateUserAddBranch(initialUserId, selectedData.getUser_id()));
+
 		return "수정완료";
     }
 	
