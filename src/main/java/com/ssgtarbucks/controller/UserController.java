@@ -22,7 +22,6 @@ import com.ssgtarbucks.service.UserService;
 import com.ssgtarbucks.util.SendMessage;
 
 
-
 @RestController
 @RequestMapping("/api/v1")
 public class UserController {
@@ -77,8 +76,7 @@ public class UserController {
 
 		if(userDTO.getAuth_code()==null) {
 			System.out.println("리액트에서 보낸 인증코드:"+userDTO.getAuth_code());
-			
-			
+					
 			
 		}else {
 			//입력한 id,email일치하는 사람 있는지 조회
@@ -92,7 +90,7 @@ public class UserController {
 				String tempCode = userService.generateTempPw();
 				System.out.println("인증코드 : " + tempCode);
 		        userService.insertTempCode(tempCode, userDTO.getUser_id());
-		        
+
 			    //메일인증
 		        userService.Mail(userDTO.getUser_email(), tempCode);
 		        
