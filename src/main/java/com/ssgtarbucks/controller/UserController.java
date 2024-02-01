@@ -133,13 +133,9 @@ public class UserController {
     public ResponseEntity<String> modify(@RequestBody UserDTO userDTO) {
 		System.out.println("UserController - /user/modify(POST) >>> userDTO : " + userDTO);
 		
-		String newPw  = new BCryptPasswordEncoder().encode(userDTO.getUser_id());
-		System.out.println(newPw+"~~"+userDTO.getUser_pw());
-
-		
-		userDTO.setUser_pw(newPw);
-
-		
+		String newPw  = new BCryptPasswordEncoder().encode(userDTO.getUser_pw());
+		System.out.println(newPw+"~~"+userDTO.getUser_pw());		
+		userDTO.setUser_pw(newPw);		
 		int result = userService.updateUserByUserIdToChgPW(userDTO);
 		if(result == 1) {
 			System.out.println("변경성공");

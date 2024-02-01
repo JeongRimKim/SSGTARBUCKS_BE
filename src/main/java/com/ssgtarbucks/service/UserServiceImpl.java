@@ -153,12 +153,12 @@ public class UserServiceImpl implements UserService {
 	    String from = "jungyun5535@naver.com"; //보내는 메일주소 ////////////수정필요
 	    String fromName = "SSGtarbucks Korea";   //보내는 사람이름
 	    String content =
-	    		"안녕하세요, 사랑하는 SSGtarbucks 직원님!\n" +
-	    		"SSGTARBUCKS 비밀번호 재설정을 위한 인증코드를 보내드립니다. 만약 비밀번호 인증코드를 요청하지 않았다면 이 이메일을 무시해주시기 바랍니다.\n\n" +
-	            "     비밀번호 인증코드 :    " + tempCode + "\n\n" +
-	    		"인증코드 입력 시 비밀번호는 직원코드로 초기화됩니다.\n\n"+
-	            "도움이 필요하시거나 다른 문의사항이 있다면 언제든지 지원팀에 문의하시거나 SSGTARBUCKS로 연락해주세요:) @SSGTARBUCKS.\n\n" +
-	            "              감사합니다!\n" +
+	    		"안녕하세요, 사랑하는 SSGtarbucks 직원님!</br>" +
+	    		"SSGTARBUCKS 비밀번호 재설정을 위한 인증코드를 보내드립니다. 만약 비밀번호 인증코드를 요청하지 않았다면 이 이메일을 무시해주시기 바랍니다.</br></br>" +
+	            "     비밀번호 인증코드 :    " + tempCode + "</br></br>" +
+	    		"인증코드 입력 시 비밀번호는 직원코드로 초기화됩니다.</br></br>"+
+	            "도움이 필요하시거나 다른 문의사항이 있다면 언제든지 지원팀에 문의하시거나 SSGTARBUCKS로 연락해주세요:) @SSGTARBUCKS.</br></br>" +
+	            "              감사합니다!</br>" +
 	            "SSGTARBUCKS 팀 드림";
 	    
 	    
