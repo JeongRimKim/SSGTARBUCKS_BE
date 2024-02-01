@@ -146,6 +146,7 @@ public class UserController {
 		} else {
 			System.out.println("변경실패");
 		}
+
 		
 		return ResponseEntity.ok(null);
     }
